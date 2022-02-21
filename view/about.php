@@ -1,13 +1,4 @@
-<?php
-
-include '../model/autoload.php';
-include '../model/Class/Admin.php';
-include '../model/DAO/AdminDAO.php';
-include '../controller/AdminController.php';
-
-$adminController = new AdminController();
-$adminController->show(1);
-?>
+<?php ?>
 
 <meta charset="utf-8">
     <title>Entremonde ASBL</title>
@@ -40,9 +31,9 @@ $adminController->show(1);
 <!--liste-->
         
             <ul class="navigation">
+            <li><a href="index.php">Index</a></li>
               <li><a href="activites.php">Activités</a></li>
 		          <li><a href="medias.php">Médias</a></li>
-		          <li><a href="about.php">Qui sommes-nous?</a></li>
               <li><a href="contacts.php">Contacts</a></li>     
             </ul>  
 
@@ -55,7 +46,7 @@ $adminController->show(1);
   <div class="warning"><p>ATTENTION : SITE EN COURS DE CONSTRUCTION</p></div><br><br>
     
 <div class="welcome">
-  <h1>Index</h1>
+    <h1>About US</h1>
     <h2>Bienvenue sur Entremonde ASBL</h2>
     <p>Entremonde ASBL : Site en construction <br><br> Bonne visite.</p>
 
