@@ -1,9 +1,7 @@
 <?php
 
-class DAO
-{
-    public function env($key, $default = null)
-    {
+class DAO{
+    public function env($key, $default = null){
         if (file_exists('../../env.php')) {
             require '../../env.php';
 
