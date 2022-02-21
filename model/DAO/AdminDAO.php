@@ -1,32 +1,24 @@
 <?php
 require_once('DAO.php');
 
-class AdminDAO extends DAO
-{
-
-    private $username;
-    private $password;
-    private $host;
-    private $dbname;
-
+class AdminDAO extends DAO{
+    
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
-    public function __construct()
-    {
+    public function __construct(){
         // Change the values according to your hosting.
-        $this->username = env('DB_USERNAME', 'root'); //The login to connect to the DB
-        $this->password = env('DB_PASSWORD', '');     //The password to connect to the DB
-        $this->host = env('DB_HOST', 'localhost');    //The name of the server where my DB is located
-        $this->dbname = env('DB_NAME');               //The name of the DB you want to attack.
-        $this->table = "admin";                       // The table to attack
+        $this->username = env('DB_USERNAME', 'root');  //The login to connect to the DB
+        $this->password = env('DB_PASSWORD', '');      //The password to connect to the DB
+        $this->host =     env('DB_HOST', 'localhost');     //The name of the server where my DB is located
+        $this->dbname =   env('DB_NAME');                //The name of the DB you want to attack.
+        $this->table =    "Admin";                        // The table to attack
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);;
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function fetchAll()
-    {
+    public function fetchAll(){
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
