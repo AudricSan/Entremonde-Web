@@ -13,7 +13,10 @@ INSERT INTO user (User_ID, User_Name, User_Firstname, User_login, User_Password,
 INSERT INTO activity (Activity_ID, Activity_Name, Activity_Description, Activity_Statut, Activity_Content, Activity_Type, Activity_Date) VALUES
                      (NULL, 'Stage Decouverte', 'lorem Impum', 1, 'Un stage de decouvertte du GN avec plein de gens', 1, '2022-02-01');
 
-ALTER TABLE `user` ADD `User_Age` INTEGER NULL DEFAULT NULL;
-ALTER TABLE user ADD `User_Birthday` DATE NULL DEFAULT NULL;
-ALTER TABLE user ADD `User_Point` INTEGER NULL DEFAULT NULL;
-ALTER TABLE picture ADD `Picture_Link` VARCHAR(50) NULL DEFAULT NULL;
+ALTER TABLE user ADD User_Age INTEGER NULL DEFAULT NULL;
+ALTER TABLE user ADD User_Birthday DATE NULL DEFAULT NULL;
+ALTER TABLE user ADD User_Point INTEGER NULL DEFAULT NULL;
+ALTER TABLE picture ADD Picture_Link VARCHAR(50) NULL DEFAULT NULL;
+
+INSERT INTO picture (Picture_ID, Picture_Name, Picture_Description, Picture_Statut, Picture_Tags, Picture_Link) VALUES
+                    (NULL, "Picture Name", "Picture_Description", 1, 1, "Picture_Link");
