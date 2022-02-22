@@ -26,8 +26,8 @@ class User
         $this->_password = $pass;
         $this->_bank = $bank;
 
-        $this->_activity = $act;
-        $this->_id = $id;
+        $this->_activity = intval($act);
+        $this->_id = intval($id);
     }
 
     //SUPER SETTER
