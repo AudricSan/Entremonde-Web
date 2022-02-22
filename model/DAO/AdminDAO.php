@@ -8,10 +8,10 @@ class AdminDAO extends DAO{
 
     public function __construct(){
         // Change the values according to your hosting.
-        $this->username = env('DB_USERNAME', 'root');  //The login to connect to the DB
-        $this->password = env('DB_PASSWORD', '');      //The password to connect to the DB
-        $this->host =     env('DB_HOST', 'localhost');     //The name of the server where my DB is located
-        $this->dbname =   env('DB_NAME');                //The name of the DB you want to attack.
+        $this->username = env('DB_USERNAME', 'root');     //The login to connect to the DB
+        $this->password = env('DB_PASSWORD', '');         //The password to connect to the DB
+        $this->host =     env('DB_HOST', 'localhost');    //The name of the server where my DB is located
+        $this->dbname =   env('DB_NAME');                 //The name of the DB you want to attack.
         $this->table =    "Admin";                        // The table to attack
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);;

@@ -60,7 +60,10 @@ class UserDAO extends DAO{
             $result['User_Password'],
             $result['User_Mail'],
             $result['User_Bank'],
-            $result['User_Activity']
+            $result['User_Activity'],
+            $result['User_Age'],
+            $result['User_Birthday'],
+            $result['User_Point']
         );
     }
 

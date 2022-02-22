@@ -6,3 +6,6 @@
 <h3> <?= $user->_email;?> </h3>
 <h3> <?= $user->_bank;?> </h3>
 <h3> <?= $user->_activity;?> </h3>
+<h3> <?= $user->_age;?> </h3>
+<h3> <?= $user->_birthday;?> </h3>
+<h3> <?= $user->_point;?> </h3>

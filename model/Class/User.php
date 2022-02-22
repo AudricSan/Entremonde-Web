@@ -13,7 +13,7 @@ class User
 
     private int    $_activity;
     private int    $_age;
-    private string $_birthday;
+    private        $_birthday;
     private int    $_point;
     private int    $_id;
 
