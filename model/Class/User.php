@@ -12,10 +12,13 @@ class User
     private string $_bank;
 
     private int    $_activity;
+    private int    $_age;
+    private string $_birthday;
+    private int    $_point;
     private int    $_id;
 
     //Constructeur
-    public function __construct($id, $name, $fname, $log, $pass, $mail, $bank, $act)
+    public function __construct($id, $name, $fname, $log, $pass, $mail, $bank, $act, $age, $birt, $point)
     {
         $this->_login = $log;
         $this->_name = $name;
@@ -27,6 +30,11 @@ class User
         $this->_bank = $bank;
 
         $this->_activity = intval($act);
+
+        $this->_age = intval($age);
+        $this->_birthday = $birt;
+        $this->_point = intval($point);
+
         $this->_id = intval($id);
     }
 
