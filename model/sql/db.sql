@@ -35,6 +35,7 @@ CREATE TABLE `Picture` (
   `Picture_Name` VARCHAR(50) NULL DEFAULT NULL,
   `Picture_Description` VARCHAR(255) NULL DEFAULT NULL,
   `Picture_Statut` INTEGER NULL DEFAULT NULL COMMENT 'Bit => 1 = True (affiché) // 0 = False (Masqué)',
+  `Picture_Link` VARCHAR(50) NULL DEFAULT NULL,
   `Picture_Tags` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`Picture_ID`)
 );
