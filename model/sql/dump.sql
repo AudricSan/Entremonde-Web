@@ -16,3 +16,4 @@ INSERT INTO activity (Activity_ID, Activity_Name, Activity_Description, Activity
 ALTER TABLE `user` ADD `User_Age` INTEGER NULL DEFAULT NULL;
 ALTER TABLE user ADD `User_Birthday` DATE NULL DEFAULT NULL;
 ALTER TABLE user ADD `User_Point` INTEGER NULL DEFAULT NULL;
+ALTER TABLE picture ADD `Picture_Link` VARCHAR(50) NULL DEFAULT NULL;
