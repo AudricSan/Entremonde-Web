@@ -132,7 +132,7 @@ class AdminDAO extends DAO{
 
         if ($admin) {
             try {
-                $statement = $this->connection->prepare("UPDATE {$this->table} SET login = ?, name = ?, fname = ?, mail = ?, pass = ?, role = ? WHERE Admin_ID = ?");
+                $statement = $this->connection->prepare("UPDATE {$this->table} SET Admin_Login = ?, Admin_Name = ?, Admin_Firstname = ?, Admin_Mail = ?, Admin_Password = ?, Admin_Role = ? WHERE Admin_ID = ?");
                 $statement->execute([
                     $admin->_login,
                     $admin->_name,
