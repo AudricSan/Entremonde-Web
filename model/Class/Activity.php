@@ -5,7 +5,7 @@ class Activity
     private string $_name;
     private string $_description;
     private string $_content;
-    private string $_date;
+    private        $_date;
 
     private int    $_type;
     private int    $_statut;
