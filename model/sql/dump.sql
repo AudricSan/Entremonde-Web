@@ -10,3 +10,5 @@ INSERT INTO user (User_ID, User_Name, User_Firstname, User_login, User_Password,
                  (NULL, 'Ronald', 'Racquez', 'Raquette', 'coucou', 'test@gmail.com', 'BE00 0000 0000 0000', 1),
                  (NULL, 'Benjamin', 'Delbar', 'Laravel', 'coucou', 'test@gmail.com', 'BE00 0000 0000 0000', 1);
 
+INSERT INTO activity (Activity_ID, Activity_Name, Activity_Description, Activity_Statut, Activity_Content, Activity_Type, Activity_Date) VALUES
+                     (NULL, 'Stage Decouverte', 'lorem Impum', 1, 'Un stage de decouvertte du GN avec plein de gens', 1, '2022-02-01')
