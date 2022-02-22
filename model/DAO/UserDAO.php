@@ -106,7 +106,6 @@ class UserDAO extends DAO{
                     $user->_email,
                     $user->_bank,
                     $user->_activity
-
                 ]);
 
                 $user->id = $this->connection->lastInsertId();
@@ -135,16 +134,16 @@ class UserDAO extends DAO{
 
         if ($user) {
             try {
-                $statement = $this->connection->prepare("UPDATE {$this->table} SET login = ?, name = ?, fname = ?, mail = ?, pass = ?, role = ? WHERE User_ID = ?");
+                $statement = $this->connection->prepare("UPDATE {$this->table} SET User_Name = ?, User_Firstname = ?, User_login = ?, User_Password = ?, User_Mail = ?, User_Bank = ?, User_Activity = ? WHERE User_ID = ?");
                 $statement->execute([
-                    $user->_id,
                     $user->_name,
                     $user->_firstname,
                     $user->_login,
                     $user->_password,
                     $user->_email,
                     $user->_bank,
-                    $user->_activity
+                    $user->_activity,
+                    $user->_id
                 ]);
 
                 return $user;
