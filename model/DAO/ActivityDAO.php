@@ -23,13 +23,13 @@ class activityDAO extends DAO{
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $activitys = array();
+            $activities = array();
 
             foreach ($results as $result) {
-                array_push($activitys, $this->create($result));
+                array_push($activities, $this->create($result));
             }
 
-            return $activitys;
+            return $activities;
         } catch (PDOException $e) {
             var_dump($e);
         }
