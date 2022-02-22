@@ -1,18 +1,17 @@
 <?php
 require_once('DAO.php');
 
-class AdminDAO extends DAO{
-    
+class UserDAO extends DAO{
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
     public function __construct(){
         // Change the values according to your hosting.
-        $this->username = env('DB_USERNAME', 'root');     //The login to connect to the DB
-        $this->password = env('DB_PASSWORD', '');         //The password to connect to the DB
-        $this->host =     env('DB_HOST', 'localhost');    //The name of the server where my DB is located
-        $this->dbname =   env('DB_NAME');                 //The name of the DB you want to attack.
-        $this->table =    "Admin";                        // The table to attack
+        $this->username = env('DB_USERNAME', 'root');    //The login to connect to the DB
+        $this->password = env('DB_PASSWORD', '');        //The password to connect to the DB
+        $this->host =     env('DB_HOST', 'localhost');   //The name of the server where my DB is located
+        $this->dbname =   env('DB_NAME');                //The name of the DB you want to attack.
+        $this->table =    "User";                        // The table to attack
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);;
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,10 +34,9 @@ class AdminDAO extends DAO{
         }
     }
 
-    public function fetch($id)
-    {
+    public function fetch($id){
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE Admin_ID = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE User_ID = ?");
             $statement->execute([$id]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -48,27 +46,33 @@ class AdminDAO extends DAO{
         }
     }
 
-    public function create($result)
-    {
+    public function create($result){
+        if (!$result) {
+            return false;
+        }
+
         var_dump($result);
-        return new Admin(
-            $result['Admin_ID'],
-            $result['Admin_Mail'],
-            $result['Admin_Login'],
-            $result['Admin_Password'],
-            $result['Admin_Name'],
-            $result['Admin_Firstname'],
-            $result['Admin_Role']
+        return new User(
+            $result['User_ID'],
+            $result['User_Name'],
+            $result['User_Firstname'],
+            $result['User_login'],
+            $result['User_Password'],
+            $result['User_Mail'],
+            $result['User_Bank'],
+            $result['User_Activity'],
+            $result['User_Age'],
+            $result['User_Birthday'],
+            $result['User_Point']
         );
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
         if (!$id) {
             return false;
         }
         try {
-            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE Admin_ID = ?");
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE User_ID = ?");
             $statement->execute([
                 $id
             ]);
@@ -77,36 +81,38 @@ class AdminDAO extends DAO{
         }
     }
 
-    public function store($data)
-    {
+    public function store($data){
         if (empty($data['log']) || empty($data['name']) || empty($data['fname']) || empty($data['mail']) || empty($data['pass']) || empty($data['role'])) {
             return false;
         }
 
-        $admin = $this->create([
-            "_id" => 0,
-            '_login' => $data['log'],
-            '_name' => $data['name'],
-            '_fname' => $data['fname'],
-            '_mail' => $data['mail'],
-            '_pass' => $data['pass'],
-            '_role' => $data['role']
+        $user = $this->create([
+            'id'         => 0,
+            '_name'      => $data['User_Name'],
+            '_firstname' => $data['User_Firstname'],
+            '_login'     => $data['User_Login'],
+            '_password'  => $data['User_Password'],
+            '_email'     => $data['User_Mail'],
+            '_bank'      => $data['User_Bank'],
+            '_activity'  => $data['User_Activity']
         ]);
 
-        if ($admin) {
+        if ($user) {
             try {
                 $statement = $this->connection->prepare("INSERT INTO {$this->table} (Admin_Mail, Admin_Login, Admin_Password, Admin_Name, Admin_Firstname, Admin_Role) VALUES (?, ?, ?, ?, ?, ?)");
                 $statement->execute([
-                    $admin->_login,
-                    $admin->_name,
-                    $admin->_fname,
-                    $admin->_mail,
-                    $admin->_pass,
-                    $admin->_role
+                    $user->_id,
+                    $user->_name,
+                    $user->_firstname,
+                    $user->_login,
+                    $user->_password,
+                    $user->_email,
+                    $user->_bank,
+                    $user->_activity
                 ]);
 
-                $admin->id = $this->connection->lastInsertId();
-                return $admin;
+                $user->id = $this->connection->lastInsertId();
+                return $user;
             } catch (PDOException $e) {
                 echo $e;
                 return false;
@@ -114,13 +120,12 @@ class AdminDAO extends DAO{
         }
     }
 
-    public function update($id, $data)
-    {
+    public function update($id, $data){
         if (!$id || empty($data['log']) || empty($data['name']) || empty($data['fname']) || empty($data['mail']) || empty($data['pass']) || empty($data['role'])) {
             return false;
         }
 
-        $admin = $this->create([
+        $user = $this->create([
             "_id" => $id,
             '_login' => $data['log'],
             '_name' => $data['name'],
@@ -130,19 +135,21 @@ class AdminDAO extends DAO{
             '_role' => $data['role']
         ]);
 
-        if ($admin) {
+        if ($user) {
             try {
-                $statement = $this->connection->prepare("UPDATE {$this->table} SET Admin_Login = ?, Admin_Name = ?, Admin_Firstname = ?, Admin_Mail = ?, Admin_Password = ?, Admin_Role = ? WHERE Admin_ID = ?");
+                $statement = $this->connection->prepare("UPDATE {$this->table} SET User_Name = ?, User_Firstname = ?, User_login = ?, User_Password = ?, User_Mail = ?, User_Bank = ?, User_Activity = ? WHERE User_ID = ?");
                 $statement->execute([
-                    $admin->_login,
-                    $admin->_name,
-                    $admin->_fname,
-                    $admin->_mail,
-                    $admin->_pass,
-                    $admin->_role
+                    $user->_name,
+                    $user->_firstname,
+                    $user->_login,
+                    $user->_password,
+                    $user->_email,
+                    $user->_bank,
+                    $user->_activity,
+                    $user->_id
                 ]);
 
-                return $admin;
+                return $user;
             } catch (PDOException $e) {
                 var_dump($e->getMessage());
                 return false;

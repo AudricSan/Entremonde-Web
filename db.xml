@@ -1,246 +1,493 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
 <!-- Active URL: https://ondras.zarovi.cz/sql/demo/?keyword=default -->
 <sql>
-<datatypes db="mysql">
-	<group label="Numeric" color="rgb(238,238,170)">
-		<type label="Integer" length="0" sql="INTEGER" re="INT" quote=""/>
-		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
-		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
-		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
-	</group>
+	<datatypes db="mysql">
+		<group label="Numeric" color="rgb(238,238,170)">
+			<type label="Integer" length="0" sql="INTEGER" re="INT" quote="" />
+			<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote="" />
+			<type label="Single precision" length="0" sql="FLOAT" quote="" />
+			<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote="" />
+		</group>
+		<group label="Character" color="rgb(255,200,200)">
+			<type label="Char" length="1" sql="CHAR" quote="'" />
+			<type label="Varchar" length="1" sql="VARCHAR" quote="'" />
+			<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'" />
+			<type label="Binary" length="1" sql="BINARY" quote="'" />
+			<type label="Varbinary" length="1" sql="VARBINARY" quote="'" />
+			<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'" />
+		</group>
+		<group label="Date &amp; Time" color="rgb(200,255,200)">
+			<type label="Date" length="0" sql="DATE" quote="'" />
+			<type label="Time" length="0" sql="TIME" quote="'" />
+			<type label="Datetime" length="0" sql="DATETIME" quote="'" />
+			<type label="Year" length="0" sql="YEAR" quote="" />
+			<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'" />
+		</group>
+		<group label="Miscellaneous" color="rgb(200,200,255)">
+			<type label="ENUM" length="1" sql="ENUM" quote="" />
+			<type label="SET" length="1" sql="SET" quote="" />
+		</group>
+	</datatypes>
 
-	<group label="Character" color="rgb(255,200,200)">
-		<type label="Char" length="1" sql="CHAR" quote="'"/>
-		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
-		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
-		<type label="Binary" length="1" sql="BINARY" quote="'"/>
-		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
-		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
-	</group>
+	<table x="200" y="450" name="Admin">
+		<row name="Admin_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Admin_Mail" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Admin_Login" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(25)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Admin_Password" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(60)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Admin_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Admin_Firstname" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Admin_Role" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Role" row="Role_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Admin_ID
+			</part>
+		</key>
+		<comment>
+			for Admin Dashboard
+		</comment>
+	</table>
 
-	<group label="Date &amp; Time" color="rgb(200,255,200)">
-		<type label="Date" length="0" sql="DATE" quote="'"/>
-		<type label="Time" length="0" sql="TIME" quote="'"/>
-		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
-		<type label="Year" length="0" sql="YEAR" quote=""/>
-		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
-	</group>
+	<table x="900" y="100" name="Picture">
+		<row name="Picture_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Picture_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Picture_Description" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Picture_Statut" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<comment>
+				Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)
+			</comment>
+		</row>
+		<row name="Picture_Tags" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Tags" row="Tag_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Picture_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="900" y="260" name="Article">
+		<row name="Article_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Article_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Article_Description" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Article_Text" null="1" autoincrement="0">
+			<datatype>
+				MEDIUMTEXT
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Article_Statut" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<comment>
+				Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)
+			</comment>
+		</row>
+		<row name="Article_tags" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Tags" row="Tag_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Article_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="420" y="220" name="Activity">
+		<row name="Activity_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Activity_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Activity_Description" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Activity_Statut" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<comment>
+				Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)
+			</comment>
+		</row>
+		<row name="Activity_Content" null="1" autoincrement="0">
+			<datatype>
+				MEDIUMTEXT
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Activity_Type" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Type" row="Type_ID" />
+		</row>
+		<row name="Activity_Date" null="1" autoincrement="0">
+			<datatype>
+				DATE
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Activity_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="200" y="330" name="Newletter">
+		<row name="Newsletter_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Newsletter_Mail" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Newsletter_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="200" y="100" name="User">
+		<row name="User_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="User_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_Firstname" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_login" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(10)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_Password" null="1" autoincrement="0">
+			<datatype>
+				INTEGER(60)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_Mail" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_Bank" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(255)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="User_Activity" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Activity" row="Activity_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				User_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="1160" y="240" name="Tags">
+		<row name="Tag_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Tag_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(50)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Tag_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="450" y="450" name="Role">
+		<row name="Role_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Role_Name" null="1" autoincrement="0">
+			<datatype>
+				VARCHAR(25)
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Role_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="700" y="320" name="Type">
+		<row name="Type_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Type_Name" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Type_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="450" y="100" name="OldActivity">
+		<row name="OldActivity_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Old_User" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="User" row="User_ID" />
+		</row>
+		<row name="Old_Activity" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Activity" row="Activity_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				OldActivity_ID
+			</part>
+		</key>
+	</table>
+
+	<table x="700" y="100" name="Album">
+		<row name="Album_ID" null="0" autoincrement="1">
+			<datatype>
+				INTEGER
+			</datatype>
+		</row>
+		<row name="Album_Name" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+		</row>
+		<row name="Album_Picture" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Picture" row="Picture_ID" />
+		</row>
+		<row name="Album_Atcivity" null="1" autoincrement="0">
+			<datatype>
+				INTEGER
+			</datatype>
+			<default>
+				NULL
+			</default>
+			<relation table="Activity" row="Activity_ID" />
+		</row>
+		<key type="PRIMARY" name="">
+			<part>
+				Album_ID
+			</part>
+		</key>
+	</table>
 	
-	<group label="Miscellaneous" color="rgb(200,200,255)">
-		<type label="ENUM" length="1" sql="ENUM" quote=""/>
-		<type label="SET" length="1" sql="SET" quote=""/>
-	</group>
-</datatypes><table x="200" y="450" name="Admin">
-<row name="Admin_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Admin_Mail" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="Admin_Login" null="1" autoincrement="0">
-<datatype>VARCHAR(25)</datatype>
-<default>NULL</default></row>
-<row name="Admin_Password" null="1" autoincrement="0">
-<datatype>VARCHAR(60)</datatype>
-<default>NULL</default></row>
-<row name="Admin_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="Admin_Firstname" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="Admin_Role" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Role" row="Role_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>Admin_ID</part>
-</key>
-<comment>for Admin Dashboard</comment>
-</table>
-<table x="900" y="100" name="Picture">
-<row name="Picture_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Picture_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="Picture_Description" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="Picture_Statut" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)</comment>
-</row>
-<row name="Picture_Tags" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Tags" row="Tag_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>Picture_ID</part>
-</key>
-</table>
-<table x="900" y="260" name="Article">
-<row name="Article_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Article_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="Article_Description" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="Article_Text" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="Article_Statut" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)</comment>
-</row>
-<row name="Article_tags" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Tags" row="Tag_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>Article_ID</part>
-</key>
-</table>
-<table x="420" y="220" name="Activity">
-<row name="Activity_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Activity_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="Activity_Description" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="Activity_Statut" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>Bit =&gt; 1 = True (affiché) // 0 = False (Masqué)</comment>
-</row>
-<row name="Activity_Content" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="Activity_Type" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Type" row="Type_ID" />
-</row>
-<row name="Activity_Date" null="1" autoincrement="0">
-<datatype>DATE</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>Activity_ID</part>
-</key>
-</table>
-<table x="200" y="330" name="Newletter">
-<row name="Newsletter_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Newsletter_Mail" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>Newsletter_ID</part>
-</key>
-</table>
-<table x="200" y="100" name="User">
-<row name="User_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="User_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="User_Firstname" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<row name="User_login" null="1" autoincrement="0">
-<datatype>VARCHAR(10)</datatype>
-<default>NULL</default></row>
-<row name="User_Password" null="1" autoincrement="0">
-<datatype>INTEGER(60)</datatype>
-<default>NULL</default></row>
-<row name="User_Mail" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="User_Bank" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
-<default>NULL</default></row>
-<row name="User_Activity" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Activity" row="Activity_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>User_ID</part>
-</key>
-</table>
-<table x="1160" y="240" name="Tags">
-<row name="Tag_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Tag_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(50)</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>Tag_ID</part>
-</key>
-</table>
-<table x="450" y="450" name="Role">
-<row name="Role_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Role_Name" null="1" autoincrement="0">
-<datatype>VARCHAR(25)</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>Role_ID</part>
-</key>
-</table>
-<table x="700" y="320" name="Type">
-<row name="Type_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Type_Name" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>Type_ID</part>
-</key>
-</table>
-<table x="450" y="100" name="OldActivity">
-<row name="OldActivity_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Old_User" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="User" row="User_ID" />
-</row>
-<row name="Old_Activity" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Activity" row="Activity_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>OldActivity_ID</part>
-</key>
-</table>
-<table x="700" y="100" name="Album">
-<row name="Album_ID" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="Album_Name" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="Album_Picture" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Picture" row="Picture_ID" />
-</row>
-<row name="Album_Atcivity" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Activity" row="Activity_ID" />
-</row>
-<key type="PRIMARY" name="">
-<part>Album_ID</part>
-</key>
-</table>
 </sql>
