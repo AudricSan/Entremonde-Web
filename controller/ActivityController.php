@@ -3,7 +3,7 @@ class ActivityController {
     private $dao;
     
     public function __construct () {
-        $this->dao = new activityDAO();
+        $this->dao = new ActivityDAO();
     }
     
     public function index () {

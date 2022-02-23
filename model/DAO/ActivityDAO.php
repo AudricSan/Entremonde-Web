@@ -1,7 +1,7 @@
 <?php
 require_once('DAO.php');
 
-class activityDAO extends DAO{
+class ActivityDAO extends DAO{
     
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
