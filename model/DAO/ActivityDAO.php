@@ -55,7 +55,7 @@ class ActivityDAO extends DAO{
         }
         
         // NOTE DUMP OF OBJECT CREATE 
-        var_dump($result);
+        // var_dump($result);
         return new Activity(
             $result['Activity_ID'],
             $result['Activity_Name'],

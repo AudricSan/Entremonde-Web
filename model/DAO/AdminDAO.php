@@ -55,7 +55,7 @@ class AdminDAO extends DAO{
         }
         
         // NOTE DUMP OF OBJECT CREATE
-        var_dump($result);
+        // var_dump($result);
         return new Admin(
             $result['Admin_ID'],
             $result['Admin_Mail'],

@@ -12,5 +12,6 @@ class DAO{
             }
             return $value;
         }
+        return $default;
     }
 }

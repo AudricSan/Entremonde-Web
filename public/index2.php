@@ -19,21 +19,21 @@ include ('../controller/PictureController.php');
 
 $admin = new AdminController();
 // $admin->show(1);
-$admin->index();
+// $admin->index();
 
 $user = new UserController();
 // $user->show(1);
 $user->index();
-
+$user->create($user);
 
 $activity = new ActivityController();
 // $activity->show(1);
-$activity->index();
+// $activity->index();
 
 
 $picture = new PictureController();
 // $picture->show(1);
-$picture->index();
+// $picture->index();
 
 
 ?>
