@@ -52,7 +52,7 @@ class UserDAO extends DAO{
         }
  
         // NOTE DUMP OF OBJECT CREATE
-        var_dump($result);
+        // var_dump($result);
         return new User(
             $result['User_ID'],
             $result['User_Name'],
@@ -83,24 +83,27 @@ class UserDAO extends DAO{
     }
 
     public function store($data){
-        if (empty($data['log']) || empty($data['name']) || empty($data['fname']) || empty($data['mail']) || empty($data['pass']) || empty($data['role'])) {
+        if (empty($data)){
             return false;
         }
 
         $user = $this->create([
-            'id'         => 0,
-            '_name'      => $data['User_Name'],
-            '_firstname' => $data['User_Firstname'],
-            '_login'     => $data['User_Login'],
-            '_password'  => $data['User_Password'],
-            '_email'     => $data['User_Mail'],
-            '_bank'      => $data['User_Bank'],
-            '_activity'  => $data['User_Activity']
+            'User_ID'         => 0,
+            'User_Name'      => $data['User_Name'],
+            'User_Firstname' => $data['User_Firstname'],
+            'User_login'     => $data['User_Login'],
+            'User_Password'  => $data['User_Password'],
+            'User_Mail'      => $data['User_Mail'],
+            'User_Bank'      => $data['User_Bank'],
+            'User_Activity'  => $data['User_Activity'],
+            'User_Age'       => $data['User_Age'],
+            'User_Birthday'  => $data['User_Birthday'],
+            'User_Point'     => $data['User_Point']
         ]);
 
         if ($user) {
             try {
-                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Admin_Mail, Admin_Login, Admin_Password, Admin_Name, Admin_Firstname, Admin_Role) VALUES (?, ?, ?, ?, ?, ?)");
+                $statement = $this->connection->prepare("INSERT INTO {$this->table} (User_ID, User_Name, User_Firstname, User_Login, User_Password, User_Mail, User_Bank, User_Activity, User_Age, User_Birthday, User_Point) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
                 $statement->execute([
                     $user->_id,
                     $user->_name,
@@ -109,7 +112,10 @@ class UserDAO extends DAO{
                     $user->_password,
                     $user->_email,
                     $user->_bank,
-                    $user->_activity
+                    $user->_activity,
+                    $user->_age,
+                    $user->_birthday,
+                    $user->_point
                 ]);
 
                 $user->id = $this->connection->lastInsertId();
