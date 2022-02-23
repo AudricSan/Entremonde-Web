@@ -1,3 +1,5 @@
+<?php ?>
+
 <form action="" method="POST">
     <label for="name">Enter your Name: </label>
     <input type="text" name="name" id="name"> <br>
