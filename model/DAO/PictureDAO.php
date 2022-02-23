@@ -50,6 +50,11 @@ class PictureDAO extends DAO{
 
     public function create($result)
     {
+        if (!$result) {
+            return false;
+        }
+        
+        // NOTE DUMP OF OBJECT CREATE
         var_dump($result);
         return new Picture(
             $result['Picture_ID'],

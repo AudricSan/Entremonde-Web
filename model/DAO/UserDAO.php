@@ -50,7 +50,8 @@ class UserDAO extends DAO{
         if (!$result) {
             return false;
         }
-
+ 
+        // NOTE DUMP OF OBJECT CREATE
         var_dump($result);
         return new User(
             $result['User_ID'],

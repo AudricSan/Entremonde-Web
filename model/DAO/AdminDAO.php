@@ -50,6 +50,11 @@ class AdminDAO extends DAO{
 
     public function create($result)
     {
+        if (!$result) {
+            return false;
+        }
+        
+        // NOTE DUMP OF OBJECT CREATE
         var_dump($result);
         return new Admin(
             $result['Admin_ID'],
