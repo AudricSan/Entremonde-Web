@@ -18,15 +18,22 @@ include ('../model/DAO/PictureDAO.php');
 include ('../controller/PictureController.php');
 
 $admin = new AdminController();
-$admin->show(1);
+// $admin->show(1);
+$admin->index();
 
 $user = new UserController();
-$user->show(1);
+// $user->show(1);
+$user->index();
+
 
 $activity = new ActivityController();
-$activity->show(1);
+// $activity->show(1);
+$activity->index();
+
 
 $picture = new PictureController();
-$picture->show(1);
+// $picture->show(1);
+$picture->index();
+
 
 ?>
