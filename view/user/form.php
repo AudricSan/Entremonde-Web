@@ -1,6 +1,8 @@
-<?php ?>
+<?php 
+$fc = new FormController;
+?>
 
-<form action="" method="POST">
+<form action="<?php $fc->index(); ?>" method="POST">
     <label for="name">Enter your Name: </label>
     <input type="text" name="name" id="name"> <br>
     

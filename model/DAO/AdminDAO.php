@@ -1,12 +1,12 @@
 <?php
 require_once('DAO.php');
 
-class AdminDAO{
-    
+class AdminDAO {
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
-    public function __construct(){
+    public function __construct()
+    {
         // Change the values according to your hosting.
         $this->username = env('DB_USERNAME', 'root');     //The login to connect to the DB
         $this->password = env('DB_PASSWORD', '');         //The password to connect to the DB
@@ -18,7 +18,8 @@ class AdminDAO{
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function fetchAll(){
+    public function fetchAll()
+    {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
@@ -53,7 +54,7 @@ class AdminDAO{
         if (!$result) {
             return false;
         }
-        
+
         // NOTE DUMP OF OBJECT CREATE
         // var_dump($result);
         return new Admin(

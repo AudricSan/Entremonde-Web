@@ -1,25 +1,28 @@
 <?php
 class FormController {
-    private $dao;
+    public $dao;
     
     public function __construct () {
-        $this->dao = new ActivityDAO();
+        $this->dao = new FormDAO();
     }
     
     public function index () {
-        return 'index';
-
+        var_dump($_POST);
     }
     
     public function show ($id) {
-        return 'show';
+        var_dump($_POST);
+
     }
     
     public function create () {
-        return 'create';    }
+        var_dump($_POST);
+
+    }
     
     public function store($data) {
-        return 'store';
+        var_dump($_POST);
     }
 }
+
 ?>

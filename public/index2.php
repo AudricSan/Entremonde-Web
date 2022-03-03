@@ -20,27 +20,29 @@ include ('../controller/ActivityController.php');
 include ('../model/Class/Picture.php');
 include ('../model/DAO/PictureDAO.php');
 include ('../controller/PictureController.php');
+ 
+include ('../model/DAO/FormDAO.php');
+include ('../controller/FormController.php');
 
 
 $admin = new AdminController();
-// $admin->show(1);
-// $admin->index();
+    $admin->show(1);
+    $admin->index();
 
 
 $user = new UserController();
-// $user->show(1);
-$user->index();
-$user->create($user);
+    $user->show(1);
+    $user->index();
+    $user->create($user);
 
 
 $activity = new ActivityController();
-// $activity->show(1);
-// $activity->index();
-
+    $activity->show(1);
+    $activity->index();
 
 $picture = new PictureController();
-// $picture->show(1);
-// $picture->index();
+    $picture->show(1);
+    $picture->index();
 
 
 ?>
