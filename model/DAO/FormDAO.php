@@ -38,7 +38,6 @@ class FormDAO{
 
     public function store($data){
         echo 'store';
-
     }
 
     public function update($id, $data){

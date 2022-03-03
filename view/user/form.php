@@ -1,16 +1,13 @@
-<?php 
-$fc = new FormController;
+<?php
+$form = new FormController;
 ?>
 
-<form action="<?php $fc->index(); ?>" method="POST">
+<form action="../../controller/FormController.php" method="POST">
     <label for="name">Enter your Name: </label>
     <input type="text" name="name" id="name"> <br>
     
     <label for="fname">Enter your Firstname: </label>
     <input type="text" name="fname" id="fname"> <br>
-    
-    <label for="login">Enter your Login: </label>
-    <input type="text" name="login" id="login"> <br>
     
     <label for="mail">Enter your Mail: </label>
     <input type="email" name="mail" id="mail"> <br>

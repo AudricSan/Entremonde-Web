@@ -26,23 +26,23 @@ include ('../controller/FormController.php');
 
 
 $admin = new AdminController();
-    $admin->show(1);
-    $admin->index();
+//     $admin->show(1);
+//     $admin->index();
 
 
 $user = new UserController();
-    $user->show(1);
+    // $user->show(1);
     $user->index();
-    $user->create($user);
+    $user->create();
 
 
 $activity = new ActivityController();
-    $activity->show(1);
-    $activity->index();
+//     $activity->show(1);
+//     $activity->index();
 
 $picture = new PictureController();
-    $picture->show(1);
-    $picture->index();
+//     $picture->show(1);
+//     $picture->index();
 
 
 ?>
