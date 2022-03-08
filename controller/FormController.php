@@ -1,16 +1,8 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "entremonde";
-
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 class FormController
 {
-    public $dao;
+    private $dao;
 
     public function __construct()
     {
@@ -19,14 +11,36 @@ class FormController
 
     public function index()
     {
+        $forms = $this->dao->fetchAll();
     }
 
     public function show($id)
     {
+        $form = $this->dao->fetch($id);
     }
 
-    public function create()
+    public function create($how)
     {
+        switch ($how) {
+            case 'admin':
+                include('../view/admin/form.php');
+                break;
+
+            case 'user':
+                include('../view/admin/form.php');
+                break;
+
+            case 'picture':
+                include('../view/admin/form.php');
+                break;
+
+            case 'activity':
+                include('../view/admin/form.php');
+                break;
+
+            default:
+                break;
+        }
     }
 
     public function store($data)
@@ -34,6 +48,17 @@ class FormController
         $this->dao->store($data);
     }
 }
+
+/* 
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "entremonde";
+
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 var_dump($_POST);
 echo('<h3> START SCRIPT </h3>');
@@ -134,3 +159,5 @@ $error['insert'] = true;
 
 end:
 header('Location: ../public');
+
+*/

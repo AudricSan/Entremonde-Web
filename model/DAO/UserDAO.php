@@ -87,19 +87,24 @@ class UserDAO{
             return false;
         }
 
+        $data = checkinput($data);
+        // var_dump($data);
+
         $user = $this->create([
             'User_ID'         => 0,
-            'User_Name'      => $data['User_Name'],
-            'User_Firstname' => $data['User_Firstname'],
-            'User_login'     => $data['User_Login'],
-            'User_Password'  => $data['User_Password'],
-            'User_Mail'      => $data['User_Mail'],
+            'User_Name'      => $data['name'],
+            'User_Firstname' => $data['fname'],
+            'User_login'     => $data['log'],
+            'User_Password'  => $data['pass'],
+            'User_Mail'      => $data['mail'],
             'User_Bank'      => $data['User_Bank'],
             'User_Activity'  => $data['User_Activity'],
             'User_Age'       => $data['User_Age'],
             'User_Birthday'  => $data['User_Birthday'],
             'User_Point'     => $data['User_Point']
         ]);
+
+        // var_dump($user);
 
         if ($user) {
             try {

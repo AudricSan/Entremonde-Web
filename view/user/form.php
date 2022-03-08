@@ -1,8 +1,11 @@
 <?php
-$form = new FormController;
+if (isset($_POST)) {
+    $user = new UserController;
+    $user->store($_POST);
+}
 ?>
 
-<form action="../../controller/FormController.php" method="POST">
+<form action="" method="POST">
     <label for="name">Enter your Name: </label>
     <input type="text" name="name" id="name"> <br>
     

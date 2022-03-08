@@ -2,15 +2,15 @@
 
 class Admin
 {
-    private string  $_login;
-    private string  $_name;
-    private string  $_firstname;
- 
-    private string  $_email;
-    private string  $_password;
+    private $_login;
+    private $_name;
+    private $_firstname;
+    
+    private $_email;
+    private $_password;
 
-    private int     $_id;
-    private int     $_role;
+    private $_id;
+    private $_role;
 
     //Constructeur
     public function __construct($id, $mail, $log, $pass, $name, $fname, $role)
