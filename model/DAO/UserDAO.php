@@ -88,7 +88,10 @@ class UserDAO{
         }
 
         $data = checkinput($data);
-        // var_dump($data);
+        
+        if ($data === false) {
+            return false;
+        }
 
         $user = $this->create([
             'User_ID'         => 0,
