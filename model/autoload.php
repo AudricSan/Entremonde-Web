@@ -18,6 +18,29 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
+    //Exist ?
+    $user = new UserDAO;
+    $admin = new AdminDAO;
+
+    $user = $user->fetchAll();
+    $admin = $admin->fetchAll();
+
+    $exist = array();
+
+    foreach ($admin as $key => $value) {
+        $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
+    }
+    
+    foreach ($user as $key => $value) {
+        $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
+    }
+
+    $exist = in_array(false, $exist) ? false : true;
+
+    if($exist === false){
+        return false;
+    }
+
     // var_dump($data);
     // $var = [IF] ? [THEN] : [ELSE];
     $name      = isset($data['name'])  ? $data['name']  : NULL;
