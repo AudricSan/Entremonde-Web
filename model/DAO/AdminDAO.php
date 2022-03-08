@@ -91,7 +91,10 @@ class AdminDAO {
         }
 
         $data = checkinput($data);
-        var_dump($data);
+
+        if ($data === false) {
+            return false;
+        }
 
         $admin = $this->create([
             "Admin_ID" => 0,
