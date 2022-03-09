@@ -22,6 +22,14 @@ include ('../model/Class/Role.php');
 require ('../model/DAO/RoleDAO.php');
 require ('../controller/RoleController.php');
 
+include ('../model/Class/Statut.php');
+require ('../model/DAO/StatutDAO.php');
+require ('../controller/StatutController.php');
+
+include ('../model/Class/Type.php');
+require ('../model/DAO/TypeDAO.php');
+require ('../controller/TypeController.php');
+
 
 $admin = new AdminController();
     // $admin->show(1);
@@ -30,7 +38,7 @@ $admin = new AdminController();
 $user = new UserController();
     // $user->show(1);
     $user->index();
-
+ 
 $activity = new ActivityController();
     // $activity->show(1);
     $activity->index();
@@ -39,9 +47,9 @@ $picture = new PictureController();
     // $picture->show(1);
     $picture->index();
 
-    $admin->create();
-    $user->create();
-    $activity->create();
+    // $admin->create();
+    // $user->create();
+    // $activity->create();
     $picture->create();
 
 ?>
