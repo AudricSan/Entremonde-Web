@@ -81,17 +81,13 @@ class PictureDAO {
 
     public function store($data)
     {
-        if (empty($data['name']) || empty($data['desc']) || empty($data['stat']) || empty($data['tag']) || empty($data['link'])) {
-            return false;
-        }
-
         $Picture = $this->create([
-            "_id" =>          0,
-            "_name" =>        $data["name"],
-            "_description" => $data["desc"],
-            "_statut" =>     $data["stat"],
-            "_tags" =>        $data["tag"],
-            "_link" =>        $data["link"],
+            "Picture_ID"          =>  0,
+            "Picture_Name"        =>  $data["name"],
+            "Picture_Description" =>  $data["desc"],
+            "Picture_Statut"      =>  $data["stat"],
+            "Picture_Tags"        =>  $data["tag"],
+            "Picture_Link"        =>  $data["link"],
         ]);
 
         if ($Picture) {
