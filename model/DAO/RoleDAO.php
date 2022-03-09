@@ -1,5 +1,4 @@
 <?php
-require_once('DAO.php');
 
 class RoleDAO
 {
