@@ -62,6 +62,7 @@ class ActivityDAO {
             $result['Activity_Statut'],
             $result['Activity_Content'],
             $result['Activity_Type'],
+            $result['Activity_Price'],
             $result['Activity_Date']
         );
     }
@@ -103,12 +104,13 @@ class ActivityDAO {
             "Activity_Date" =>        $data["date"],
             "Activity_Type" =>        $data["type"],
             "Activity_Statut" =>      $data["statut"],
+            "Activity_Price" =>       $data["price"],
             "Activity_ID" =>          0
         ]);
 
         if ($activity) {
             try {
-                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Activity_Name, Activity_Description, Activity_Statut, Activity_Content, Activity_Type, Activity_Date) VALUES (?, ?, ?, ?, ?, ?)");
+                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Activity_Name, Activity_Description, Activity_Statut, Activity_Content, Activity_Type, Activity_Date, Activity_Price) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $statement->execute([
                     $activity->_name,
                     $activity->_description,
@@ -116,6 +118,7 @@ class ActivityDAO {
                     $activity->_content,
                     $activity->_type,
                     $activity->_date,
+                    $activity->_price,
                 ]);
 
                 $activity->id = $this->connection->lastInsertId();
