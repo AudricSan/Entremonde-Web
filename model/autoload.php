@@ -25,21 +25,6 @@ function checkinput($data)
     $user = $user->fetchAll();
     $admin = $admin->fetchAll();
 
-    $exist = array();
-    foreach ($admin as $key => $value) {
-        $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
-    }
-
-    foreach ($user as $key => $value) {
-        $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
-    }
-
-    $exist = in_array(false, $exist) ? false : true;
-
-    if ($exist === false) {
-        return false;
-    }
-
     // var_dump($data);
     // $var = [IF] ? [THEN] : [ELSE];
 
@@ -65,6 +50,32 @@ function checkinput($data)
     $statut    = isset($data['statut'])        ? $data['statut']        : false;
     $content   = isset($data['content'])       ? $data['content']       : false;
     $date      = isset($data['date'])          ? $data['date']          : false;
+    $price     = isset($data['price'])         ? $data['price']         : false;
+
+    //Picture
+    $tag       = isset($data['tags'])          ? $data['tags']          : false;
+
+    $exist = array();
+    foreach ($admin as $key => $value) {
+        $mail === $value->_email ? array_push($exist, true) : array_push($exist, false);
+    }
+
+    $exist = in_array(false, $exist) ? true : false;
+
+    if ($exist === false) {
+        return false;
+    }
+
+    $exist = array();
+    foreach ($user as $key => $value) {
+        $mail === $value->_email ? array_push($exist, true) : array_push($exist, false);
+    }
+
+    $exist = in_array(false, $exist) ? true : false;
+
+    if ($exist === false) {
+        return false;
+    }
 
     //Regex
     $nregex = "/^[a-z 0-9-]{2,15}$/";
@@ -127,6 +138,12 @@ function checkinput($data)
     } else {
         $error['desc'] = false;
     }
+    
+    if ($price > 0) {
+        $error['price'] = true;
+    } else {
+        $error['price'] = false;
+    }
 
     //confert Data
     $name = ucfirst($name);
@@ -162,6 +179,7 @@ function checkinput($data)
     $data['statut']         = isset($statut)    ? $statut    : false;
     $data['content']        = isset($content)   ? $content   : false;
     $data['date']           = isset($date)      ? $date      : false;
+    $data['tag']            = isset($tag)       ? $tag       : false;
 
     return $data;
 }
@@ -179,7 +197,15 @@ function checkerror($for, $error)
             break;
 
         case 'activity':
-            if ($error['name'] === false || $error['desc'] === false || $error['content'] === false) {
+            if ($error['name'] === false || $error['desc'] === false || $error['content'] === false || $error['price'] === false) {
+                $result = false;
+            } else {
+                $result = true;
+            }
+            break;
+            
+        case 'picture':
+            if ($error['name'] === false || $error['desc'] === false || $error['statut'] === false || $error['tags'] === false) {
                 $result = false;
             } else {
                 $result = true;
