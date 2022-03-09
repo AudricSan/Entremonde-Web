@@ -30,26 +30,30 @@ include ('../model/Class/Type.php');
 require ('../model/DAO/TypeDAO.php');
 require ('../controller/TypeController.php');
 
+include ('../model/Class/Tag.php');
+require ('../model/DAO/TagDAO.php');
+require ('../controller/TagController.php');
+
 
 $admin = new AdminController();
     // $admin->show(1);
-    $admin->index();
+    // $admin->index();
 
 $user = new UserController();
     // $user->show(1);
-    $user->index();
+    // $user->index();
  
 $activity = new ActivityController();
     // $activity->show(1);
-    $activity->index();
+    // $activity->index();
 
 $picture = new PictureController();
     // $picture->show(1);
     $picture->index();
 
-    // $admin->create();
+    $admin->create();
     // $user->create();
     // $activity->create();
-    $picture->create();
+    // $picture->create();
 
 ?>
