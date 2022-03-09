@@ -3,8 +3,8 @@
 $statut = new StatutController;
 $status = $statut->index();
 
-$type = new TypeDAO;
-$types = $type->fetchAll();
+$type = new TypeController;
+$types = $type->index();
 
 if (isset($_POST)) {
     $user = new ActivityController;
@@ -18,6 +18,12 @@ if (isset($_POST)) {
     
     <label for="desc">Activity Descrition: </label>
     <input type="text" name="desc" id="desc"> <br>
+
+    <label for="content">Activity Content: </label>
+    <textarea name="content"
+        rows="5" cols="30"
+        minlength="80" maxlength="800"
+        placeholder="Description complette de lactiviter, information Public."></textarea> <br>
     
     <label for="statut">Activity Default Statut: </label>
     <select name="statut" id="statut">
@@ -31,12 +37,6 @@ if (isset($_POST)) {
         ?>
     </select> <br>
 
-    <label for="content">Activity Content: </label>
-    <textarea name="content"
-        rows="5" cols="30"
-        minlength="10" maxlength="30"
-        placeholder="Description complette de lactiviter, information Public."></textarea> <br>
-
     <label for="type">Activity Type: </label>
     <select name="type" id="type">
         <?php
@@ -49,6 +49,9 @@ if (isset($_POST)) {
         ?>
     </select> <br>   
      
+    <label for="price">Activity Price: </label>
+    <input type="number" name="price" id="price"> <br>
+
     <label for="date">Activity Date: </label>
     <input type="date" name="date" id="date"> <br>
 
