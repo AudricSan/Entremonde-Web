@@ -26,30 +26,47 @@ function checkinput($data)
     $admin = $admin->fetchAll();
 
     $exist = array();
-
     foreach ($admin as $key => $value) {
         $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
     }
-    
+
     foreach ($user as $key => $value) {
         $data['mail'] === $value->_email ? array_push($exist, true) : array_push($exist, false);
     }
 
     $exist = in_array(false, $exist) ? false : true;
 
-    if($exist === false){
+    if ($exist === false) {
         return false;
     }
 
     // var_dump($data);
     // $var = [IF] ? [THEN] : [ELSE];
-    $name      = isset($data['name'])  ? $data['name']  : NULL;
-    $firstname = isset($data['fname']) ? $data['fname'] : NULL;
-    $mail      = isset($data['mail'])  ? $data['mail']  : NULL;
-    $pass      = isset($data['pass'])  ? $data['pass']  : NULL;
-    $pass2     = isset($data['pass2']) ? $data['pass2'] : NULL;
-    $role      = isset($data['role'])  ? $data['role']  : NULL;
 
+    //Globals
+    $login     = isset($data['log'])           ? $data['log']           : false;
+    $name      = isset($data['name'])          ? $data['name']          : false;
+    $firstname = isset($data['fname'])         ? $data['fname']         : false;
+    $mail      = isset($data['mail'])          ? $data['mail']          : false;
+    $pass      = isset($data['pass'])          ? $data['pass']          : false;
+    $pass2     = isset($data['pass2'])         ? $data['pass2']         : false;
+    $role      = isset($data['role'])          ? $data['role']          : false;
+
+    //User
+    $bank      = isset($data['User_Bank'])     ? $data['User_Bank']     : false;
+    $activity  = isset($data['User_Activity']) ? $data['User_Activity'] : false;
+    $age       = isset($data['User_Age'])      ? $data['User_Age']      : false;
+    $bday      = isset($data['User_Birthday']) ? $data['User_Birthday'] : false;
+    $point     = isset($data['User_Point'])    ? $data['User_Point']    : false;
+
+    //Activity
+    $desc      = isset($data['desc'])          ? $data['desc']          : false;
+    $type      = isset($data['type'])          ? $data['type']          : false;
+    $statut    = isset($data['statut'])        ? $data['statut']        : false;
+    $content   = isset($data['content'])       ? $data['content']       : false;
+    $date      = isset($data['date'])          ? $data['date']          : false;
+
+    //Regex
     $nregex = "/^[a-z 0-9-]{2,15}$/";
     $mregex = "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/";
     $pregex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10,}$/";
@@ -60,11 +77,18 @@ function checkinput($data)
     unset($data);
     unset($_POST);
 
+    //Trim data
+    $desc       = rtrim($desc);
+    $content    = rtrim($content);
+
+    $name       = rtrim($name);
+    $firstname  = rtrim($firstname);
+    $mail       = rtrim($mail);
+
     //format data
-    $name = strtolower($name);
-    $firstname = strtolower($firstname);
-    $mail = rtrim($mail);
-    $mail = strtolower($mail);
+    $name       = strtolower($name);
+    $firstname  = strtolower($firstname);
+    $mail       = strtolower($mail);
 
     //Check data format
     if (preg_match($nregex, $name)) {
@@ -82,18 +106,26 @@ function checkinput($data)
     if ($pass === $pass2) {
         unset($pass2);
 
-        if (!preg_match($pregex, $pass)) {
+        if (preg_match($pregex, $pass)) {
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            $error['pass'] = true;
+        } else {
             $error['pass'] = false;
         }
-
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-        $error['pass'] = true;
     } else {
         $error['pass'] = false;
     }
 
-    if (in_array(false, $error)) {
-        return $error;
+    if (strlen($content) > 0) {
+        $error['content'] = true;
+    } else {
+        $error['content'] = false;
+    }
+
+    if (strlen($desc) > 0) {
+        $error['desc'] = true;
+    } else {
+        $error['desc'] = false;
     }
 
     //confert Data
@@ -109,18 +141,55 @@ function checkinput($data)
     //Return Data
     $data = array();
 
+    if (in_array(false, $error)) {
+        $data['error'] = $error;
+    }
+
     // $var = [IF] ? [THEN] : [ELSE];
-    $data['log']            = isset($login)     ? $login     : NULL;
-    $data['name']           = isset($name)      ? $name      : NULL;
-    $data['fname']          = isset($firstname) ? $firstname : NULL;
-    $data['mail']           = isset($mail)      ? $mail      : NULL;
-    $data['pass']           = isset($pass)      ? $pass      : NULL;
-    $data['role']           = isset($role)      ? $role      : NULL;
-    $data['User_Bank']      = isset($bank)      ? $bank      : NULL;
-    $data['User_Activity']  = isset($activity)  ? $activity  : NULL;
-    $data['User_Age']       = isset($age)       ? $age       : NULL;
-    $data['User_Birthday']  = isset($bday)      ? $bday      : NULL;
-    $data['User_Point']     = isset($point)     ? $point     : NULL;
+    $data['log']            = isset($login)     ? $login     : false;
+    $data['name']           = isset($name)      ? $name      : false;
+    $data['fname']          = isset($firstname) ? $firstname : false;
+    $data['mail']           = isset($mail)      ? $mail      : false;
+    $data['pass']           = isset($pass)      ? $pass      : false;
+    $data['role']           = isset($role)      ? $role      : false;
+    $data['User_Bank']      = isset($bank)      ? $bank      : false;
+    $data['User_Activity']  = isset($activity)  ? $activity  : false;
+    $data['User_Age']       = isset($age)       ? $age       : false;
+    $data['User_Birthday']  = isset($bday)      ? $bday      : false;
+    $data['User_Point']     = isset($point)     ? $point     : false;
+    $data['desc']           = isset($desc)      ? $desc      : false;
+    $data['type']           = isset($type)      ? $type      : false;
+    $data['statut']         = isset($statut)    ? $statut    : false;
+    $data['content']        = isset($content)   ? $content   : false;
+    $data['date']           = isset($date)      ? $date      : false;
 
     return $data;
+}
+
+function checkerror($for, $error)
+{
+    switch ($for) {
+        case 'user':
+        case 'admin':
+            if ($error['name'] === false || $error['mail'] === false || $error['pass'] === false) {
+                $result = false;
+            } else {
+                $result = true;
+            }
+            break;
+
+        case 'activity':
+            if ($error['name'] === false || $error['desc'] === false || $error['content'] === false) {
+                $result = false;
+            } else {
+                $result = true;
+            }
+            break;
+
+        default:
+            $result = false;
+            break;
+    }
+
+    return $result;
 }
