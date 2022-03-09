@@ -9,10 +9,11 @@ class Activity
 
     private int    $_type;
     private int    $_statut;
+    private int    $_price;
     private int    $_id;
 
     //Constructeur
-    public function __construct($id, $name, $desc, $stat, $cont, $type, $date)
+    public function __construct($id, $name, $desc, $stat, $cont, $type, $date, $price)
     {
         $this->_name = $name;
         $this->_description = $desc;
@@ -20,6 +21,7 @@ class Activity
         $this->_type = intval($type);
         $this->_date = $date;
         $this->_statut = intval($stat);
+        $this->_price = intval($price);
         $this->_id = intval($id);
     }
 
