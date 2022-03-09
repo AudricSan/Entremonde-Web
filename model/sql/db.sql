@@ -72,6 +72,7 @@ CREATE TABLE `Activity` (
   `Activity_Content` MEDIUMTEXT NULL DEFAULT NULL,
   `Activity_Type` INTEGER NULL DEFAULT NULL,
   `Activity_Date` DATE NULL DEFAULT NULL,
+  `Activity_Price` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`Activity_ID`)
 );
 
@@ -234,8 +235,8 @@ ALTER TABLE `Album` ADD FOREIGN KEY (Album_Atcivity) REFERENCES `Activity` (`Act
 -- ('','','','','','');
 -- INSERT INTO `Article` (`Article_ID`,`Article_Name`,`Article_Description`,`Article_Text`,`Article_Statut`,`Article_tags`) VALUES
 -- ('','','','','','');
--- INSERT INTO `Activity` (`Activity_ID`,`Activity_Name`,`Activity_Description`,`Activity_Statut`,`Activity_Content`,`Activity_Type`,`Activity_Date`) VALUES
--- ('','','','','','','');
+-- INSERT INTO `Activity` (`Activity_ID`,`Activity_Name`,`Activity_Description`,`Activity_Statut`,`Activity_Content`,`Activity_Type`,`Activity_Date`,`Activity_Price`) VALUES
+-- ('','','','','','','','');
 -- INSERT INTO `Newletter` (`Newsletter_ID`,`Newsletter_Mail`) VALUES
 -- ('','');
 -- INSERT INTO `User` (`User_ID`,`User_Name`,`User_Firstname`,`User_login`,`User_Password`,`User_Mail`,`User_Bank`,`User_Activity`,`User_Age`,`User_Birthday`,`User_Point`) VALUES
