@@ -38,3 +38,15 @@ INSERT INTO `type` (`Type_ID`, `Type_Name`) VALUES
                    (NULL, "Ecoles"),
                    (NULL, "Mariages"),
                    (NULL, "Déambulations");
+
+INSERT INTO `statut` (`Statut_ID`, `Statut_Name`) VALUES
+                     (NULL, "Public"),
+                     (NULL, "Private");
+                     
+INSERT INTO `tags` (`Tag_ID`, `Tag_Name`) VALUES
+                     (NULL, "Craft"),
+                     (NULL, "Portrait"),
+                     (NULL, "Extérieur"),
+                     (NULL, "Poses"),
+                     (NULL, "Live"),
+                     (NULL, "Groupe");
