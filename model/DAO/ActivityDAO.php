@@ -1,8 +1,8 @@
 <?php
 require_once('DAO.php');
 
-class activityDAO extends DAO{
-    
+class ActivityDAO {
+
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
@@ -50,7 +50,12 @@ class activityDAO extends DAO{
 
     public function create($result)
     {
-        var_dump($result);
+        if (!$result) {
+            return false;
+        }
+        
+        // NOTE DUMP OF OBJECT CREATE 
+        // var_dump($result);
         return new Activity(
             $result['Activity_ID'],
             $result['Activity_Name'],

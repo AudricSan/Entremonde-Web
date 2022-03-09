@@ -9,7 +9,7 @@ class User
     private string $_email;
     private string $_password;
 
-    private string $_bank;
+    private        $_bank;
 
     private int    $_activity;
     private int    $_age;

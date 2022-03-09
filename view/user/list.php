@@ -9,6 +9,9 @@
             <?= $user->_email;?>
             <?= $user->_bank;?>
             <?= $user->_activity;?>
+            <?= $user->_age;?>
+            <?= $user->_birthday;?>
+            <?= $user->_point;?>
         </li>
     <?php endforeach; ?>
     </ul>

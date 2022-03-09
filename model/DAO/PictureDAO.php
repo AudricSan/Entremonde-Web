@@ -1,8 +1,7 @@
 <?php
 require_once('DAO.php');
 
-class PictureDAO extends DAO{
-    
+class PictureDAO {    
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
@@ -50,7 +49,12 @@ class PictureDAO extends DAO{
 
     public function create($result)
     {
-        var_dump($result);
+        if (!$result) {
+            return false;
+        }
+        
+        // NOTE DUMP OF OBJECT CREATE
+        // var_dump($result);
         return new Picture(
             $result['Picture_ID'],
             $result['Picture_Name'],

@@ -21,7 +21,9 @@ class AdminController {
     }
     
     public function store($data) {
-        $this->dao->store($data);
+        if(isset($data)){
+            $this->dao->store($data);
+        }
     }
 }
 ?>
