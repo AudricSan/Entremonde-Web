@@ -8,7 +8,7 @@ $env = [
     //DATABASE
     'DB_HOST' => 'localhost',
     'DB_USERNAME' => 'root',
-    'DB_PASSWORD' => 'root',
+    'DB_PASSWORD' => '',
     'DB_NAME' => 'entremonde',
     'DB_PORT' => 3306,
 
