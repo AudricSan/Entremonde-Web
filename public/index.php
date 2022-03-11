@@ -37,21 +37,21 @@ require ('../controller/TagController.php');
 
 $admin = new AdminController();
     // $admin->show(1);
-    // $admin->index();
+    $admin->index();
 
 $user = new UserController();
     // $user->show(1);
-    // $user->index();
+    $user->index();
  
 $activity = new ActivityController();
     // $activity->show(1);
-    // $activity->index();
+    $activity->index();
 
 $picture = new PictureController();
     // $picture->show(1);
     $picture->index();
 
-    $admin->create();
+    // $admin->create();
     // $user->create();
     // $activity->create();
     // $picture->create();
