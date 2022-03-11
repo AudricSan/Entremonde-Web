@@ -6,9 +6,11 @@ $status = $statut->index();
 $tag = new TagController;
 $tags = $tag->index();
 
-if (isset($_POST)) {
+// var_dump($_POST);
+if (!empty($_POST)) {
     $user = new PictureController;
     $user->store($_POST);
+    unset($_POST);
 }
 ?>
 
