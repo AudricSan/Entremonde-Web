@@ -8,9 +8,11 @@ $tags = $tag->index();
 
 // var_dump($_POST);
 if (!empty($_POST)) {
-    $user = new PictureController;
-    $user->store($_POST);
+    $data = $_POST;
     unset($_POST);
+    
+    $user = new PictureController;
+    $user->store($data);
 }
 ?>
 
