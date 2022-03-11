@@ -18,12 +18,7 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
-    //Exist ?
-    $user = new UserDAO;
-    $admin = new AdminDAO;
-
-    $user = $user->fetchAll();
-    $admin = $admin->fetchAll();
+    unset($_POST);
 
     // var_dump($data);
     // $var = [IF] ? [THEN] : [ELSE];
@@ -54,26 +49,36 @@ function checkinput($data)
 
     //Picture
     $tag       = isset($data['tags'])          ? $data['tags']          : false;
+    $image     = isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : false;
+    $imagePath          = '../view/picture/store/' . basename($image);
+    $imageExtension     = pathinfo($imagePath, PATHINFO_EXTENSION);
+    $isSuccess          = true;
+    $isUploadSuccess    = false;
 
-    $exist = array();
+    //Exist ?
+    $user = new UserDAO;
+    $admin = new AdminDAO;
+
+    $user = $user->fetchAll();
+    $admin = $admin->fetchAll();
+
+    $exist = array(
+        'admin' => false,
+        'user'  => false
+    );
+
     foreach ($admin as $key => $value) {
-        $mail === $value->_email ? array_push($exist, true) : array_push($exist, false);
+        $mail === $value->_email ? $exist['admin'] =  true : $exist['admin'] =  false;
     }
 
-    $exist = in_array(false, $exist) ? true : false;
-
-    if ($exist === false) {
-        return false;
-    }
-
-    $exist = array();
     foreach ($user as $key => $value) {
-        $mail === $value->_email ? array_push($exist, true) : array_push($exist, false);
+        $mail === $value->_email ? $exist['user'] =  true : $exist['user'] =  false;
     }
 
-    $exist = in_array(false, $exist) ? true : false;
+    // var_dump($exist);
 
-    if ($exist === false) {
+    if ($exist['admin'] === true || $exist['user'] === true) {
+        echo ('USER OR ADMIN EXIST');
         return false;
     }
 
@@ -138,11 +143,52 @@ function checkinput($data)
     } else {
         $error['desc'] = false;
     }
-    
+
     if ($price > 0) {
         $error['price'] = true;
     } else {
         $error['price'] = false;
+    }
+    
+    if ($tag > 0) {
+        $error['tags'] = true;
+    } else {
+        $error['tags'] = false;
+    }
+    
+    if ($statut > 0) {
+        $error['statut'] = true;
+    } else {
+        $error['statut'] = false;
+    }
+
+
+    //Picture Check ==> Picture Formater
+    if (empty($image)) {
+        $error['image'] = 'Ce champ ne peut pas être vide';
+        $isSuccess = false;
+    } else {
+        $isUploadSuccess = true;
+        $error['image'] = true;
+
+        if ($imageExtension != "jpg" && $imageExtension != "png" && $imageExtension != "jpeg" && $imageExtension != "gif") {
+            $error['image'] = "Les fichiers autorises sont: .jpg, .jpeg, .png, .gif";
+            $isUploadSuccess = false;
+        }
+        if (file_exists($imagePath)) {
+            $error['image'] = "Le fichier existe deja";
+            $isUploadSuccess = false;
+        }
+        if ($_FILES["image"]["size"] > 500000) {
+            $error['image'] = "Le fichier ne doit pas depasser les 500KB";
+            $isUploadSuccess = false;
+        }
+        if ($isUploadSuccess) {
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath)) {
+                $error['image'] = "Il y a eu une erreur lors de l'upload";
+                $isUploadSuccess = false;
+            }
+        }
     }
 
     //confert Data
@@ -180,16 +226,21 @@ function checkinput($data)
     $data['content']        = isset($content)   ? $content   : false;
     $data['date']           = isset($date)      ? $date      : false;
     $data['tag']            = isset($tag)       ? $tag       : false;
+    $data['link']           = isset($image)     ? $image     : false;
 
+    unset($_POST);
     return $data;
 }
 
 function checkerror($for, $error)
 {
+    var_dump($for);
+    var_dump($error);
+
     switch ($for) {
         case 'user':
         case 'admin':
-            if ($error['name'] === false || $error['mail'] === false || $error['pass'] === false) {
+            if ($error['name'] !== true || $error['mail'] !== true || $error['pass'] !== true) {
                 $result = false;
             } else {
                 $result = true;
@@ -197,15 +248,15 @@ function checkerror($for, $error)
             break;
 
         case 'activity':
-            if ($error['name'] === false || $error['desc'] === false || $error['content'] === false || $error['price'] === false) {
+            if ($error['name'] !== true || $error['desc'] !== true || $error['content'] !== true || $error['price'] !== true) {
                 $result = false;
             } else {
                 $result = true;
             }
             break;
-            
+
         case 'picture':
-            if ($error['name'] === false || $error['desc'] === false || $error['statut'] === false || $error['tags'] === false) {
+            if ($error['name'] !== true || $error['desc'] !== true || $error['statut'] !== true || $error['tags'] !== true || $error['image'] !== true) {
                 $result = false;
             } else {
                 $result = true;
