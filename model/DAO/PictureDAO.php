@@ -1,10 +1,12 @@
 <?php
 
-class PictureDAO {    
+class PictureDAO
+{
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
-    public function __construct(){
+    public function __construct()
+    {
         // Change the values according to your hosting.
         $this->username = env('DB_USERNAME', 'root');       //The login to connect to the DB
         $this->password = env('DB_PASSWORD', '');           //The password to connect to the DB
@@ -16,7 +18,8 @@ class PictureDAO {
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function fetchAll(){
+    public function fetchAll()
+    {
         try {
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
@@ -51,7 +54,7 @@ class PictureDAO {
         if (!$result) {
             return false;
         }
-        
+
         // NOTE DUMP OF OBJECT CREATE
         // var_dump($result);
         return new Picture(
@@ -81,25 +84,44 @@ class PictureDAO {
 
     public function store($data)
     {
+        unset($_POST);
+
+        if (empty($data)) {
+            echo ('THERE ARE NO DATA');
+            return false;
+        }
+
+        // var_dump($data);
+        $data = checkinput($data);
+        $error = checkerror('picture', $data['error']);
+        // var_dump($error);
+        // var_dump($data);
+
+        if ($error === false) {
+            echo ('THERE ARE AN ERROR');
+            unset($_POST);
+            return false;
+        }
+
         $Picture = $this->create([
             "Picture_ID"          =>  0,
             "Picture_Name"        =>  $data["name"],
             "Picture_Description" =>  $data["desc"],
-            "Picture_Statut"      =>  $data["stat"],
+            "Picture_Statut"      =>  $data["statut"],
             "Picture_Tags"        =>  $data["tag"],
             "Picture_Link"        =>  $data["link"],
         ]);
 
         if ($Picture) {
             try {
-                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Picture_Mail, Picture_Login, Picture_Password, Picture_Name, Picture_Firstname, Picture_Role) VALUES (?, ?, ?, ?, ?, ?)");
+                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Picture_Name, Picture_Description, Picture_Statut, Picture_Tags, Picture_Link) VALUES (?, ?, ?, ?, ?)");
+
                 $statement->execute([
                     $Picture->_name,
                     $Picture->_description,
                     $Picture->_statut,
                     $Picture->_tags,
                     $Picture->_link,
-                    $Picture->_id
                 ]);
 
                 $Picture->id = $this->connection->lastInsertId();
@@ -109,6 +131,8 @@ class PictureDAO {
                 return false;
             }
         }
+
+        unset($_POST);
     }
 
     public function update($id, $data)
