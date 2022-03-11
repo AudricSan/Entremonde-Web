@@ -84,6 +84,8 @@ class ActivityDAO {
 
     public function store($data)
     {
+        unset($_POST);
+
         if (empty($data)) {
             return false;
         }
