@@ -270,3 +270,32 @@ function checkerror($for, $error)
 
     return $result;
 }
+
+function gethome(){
+    $activity = new ActivityController();
+    $activity = $activity->index();
+    // var_dump($activity);
+
+    foreach ($activity as $key => $value) {
+        // var_dump($value);
+
+        echo "
+        <article>
+            <div class='stages'>
+                <h3>$value->_name</h3>
+
+                <p>
+                    $value->_content
+                </p>
+
+                <p>
+                    $value->_description
+                </p>
+
+                <a class='button' href='#'>click here</a>
+            </div>
+
+            <div class='player' id=$value->_media></div>
+        </article>";
+    }
+}
