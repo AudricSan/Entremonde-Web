@@ -19,7 +19,7 @@ class ActivityDAO {
 
     public function fetchAll(){
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} where Activity_Statut	= 1");
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $activities = array();
@@ -52,18 +52,21 @@ class ActivityDAO {
         if (!$result) {
             return false;
         }
-        
+
+        // var_dump($result);
+
         // NOTE DUMP OF OBJECT CREATE 
         // var_dump($result);
         return new Activity(
-            $result['Activity_ID'],
-            $result['Activity_Name'],
-            $result['Activity_Description'],
-            $result['Activity_Statut'],
-            $result['Activity_Content'],
-            $result['Activity_Type'],
-            $result['Activity_Price'],
-            $result['Activity_Date']
+            $result['Activity_ID'          ],
+            $result['Activity_Name'        ],
+            $result['Activity_Description' ],
+            $result['Activity_Statut'      ],
+            $result['Activity_Content'     ],
+            $result['Activity_Type'        ],
+            $result['Activity_Date'        ],
+            $result['Activity_Price'       ],
+            $result['Activity_Media'       ]
         );
     }
 
@@ -107,6 +110,7 @@ class ActivityDAO {
             "Activity_Type" =>        $data["type"],
             "Activity_Statut" =>      $data["statut"],
             "Activity_Price" =>       $data["price"],
+            "Activity_Media" =>       $data["Media"],
             "Activity_ID" =>          0
         ]);
 
@@ -121,6 +125,7 @@ class ActivityDAO {
                     $activity->_type,
                     $activity->_date,
                     $activity->_price,
+                    $activity->_media
                 ]);
 
                 $activity->id = $this->connection->lastInsertId();
@@ -148,6 +153,8 @@ class ActivityDAO {
             "_date" => $data["date"],
             "_type" => $data["type"],
             "_statut" => $data["stat"],
+            "_price" => $data["price"],
+            "_media" => $data["media"],
         ]);
 
         if ($activity) {
@@ -160,6 +167,8 @@ class ActivityDAO {
                     $activity->_content,
                     $activity->_date,
                     $activity->_type,
+                    $activity->_price,
+                    $activity->_media,
                     $activity->_id
                 ]);
 
