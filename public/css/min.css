@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Playfair+Display&display=swap');
+/*font-family: 'Oswald', sans-serif;
+font-family: 'Playfair Display', serif;*/
+
+/* GENERAL*/
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container{
+  width: 100vw;
+  min-height: 100vh;
+}
+
+header nav {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    height: 25%;
+}
+
+header nav ul.navigation {
+  justify-content: center;
+
+
+}
+
+header nav ul.navigation li {
+  margin: 3%;
+  padding: 8px 25px;;
+  top: 100px;
+}
+header figure img{
+ display: none;
+}
+
+header div.banner{
+  padding: 30% 0 0 0;
+}
+
+/* section contenu en colonne*/
+
+section#accroche {
+    padding-bottom: 0.2rem;
+    padding-top: 8rem;
+    height: 100vh;
+}
+
+section#accroche h1 {
+    background-color: #efefef;
+    color: #ff7a00;
+    padding-top: 5rem;
+}
+
+section#accroche p{
+    color: #ff7a00;
+}
+
+section#contenu ul.liste{
+    flex-flow: column wrap;
+}
+
+/* section images en colonne */
+section#images{
+  flex-flow: column wrap;
+}
+
+section#images article{
+    flex-basis: 100%;
+}
+
+
+/*------------------------------*/
+
+
+
+.wrapper
+{
+    width: inherit;
+    margin: 10%;
+    padding: 0 10px;
+}
+
+.overlay
+{
+    max-width: 120px;
+}
+.wrapper
+{
+ 
+    margin: auto;
+    padding-top : 5px;
+}
+
+
+#produits
+{
+    background-color: #efefef;
+    padding : 65px 65px;
+    
+}
+#produits article
+{
+    width: 50vw;
+    height: 50vh;
+    float: left;
+    border-radius: 10px;
+  
+}
+
+#produits article:first-child /*voir nth-child span*/
+{
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.button-2
+{
+    padding :0;
+}
+
+
+
+
+
+.clear
+{
+    clear: both;
+}

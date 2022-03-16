@@ -38,8 +38,6 @@ require('../controller/TagController.php');
 <!DOCTYPE HTML>
 <html lang="fr">
 
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -60,14 +58,12 @@ require('../controller/TagController.php');
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
 </head>
 
-
-
 <body>
     <div class="open"></div>
     <div class="container">
 
     <?php include("include/header.php"); ?>
-
+      
         <!-- Intro -->
         <section id="accroche">
             <p>stages, anniv</p>
