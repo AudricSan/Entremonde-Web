@@ -70,11 +70,9 @@ require('../controller/TagController.php');
     <meta name="description" content="Free Web tutorials">
     <meta name="auteur" content="Xavier Deleclos">
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    <link rel="stylesheet" media="screen and (max-width:1200px)" type="text/css" href="css/medium.css" media="screen">
-    <link rel="stylesheet" media="screen and (max-width:768px)" type="text/css" href="css/min.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" /> -->
 
     <!--icones importées-->
     <script src="https://kit.fontawesome.com/3d76d9e733.js" crossorigin="anonymous"></script>
@@ -86,8 +84,8 @@ require('../controller/TagController.php');
 <body>
     <div class="open"></div>
     <div class="container">
-        <?php 
-            include ("include/header.php");
+        <?php
+        include("include/header.php");
         ?>
         <!-- Intro -->
         <section id="accroche">
@@ -95,83 +93,16 @@ require('../controller/TagController.php');
             <h1>Osez la grande aventure</h1>
             <div class="button" href="#"><span>C'est par ici</span></div>
         </section>
-        
-        <br><br>
 
         <!--Section stages-->
         <section id="sectionstage">
-            <article>
-                <section id="sectionstage2">
-                    <div class="stages">
-                        <h3>Trouver un Stage</h3>
-                        <p>
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <p>
-                            tester tester tester >
-                        </p>
-                        <a class="button">click here</a>
-                    </div>
-
-                    <div id="player" class="video"></div>
-                </section>
-            </article>
-        </section>
-
-        <!--Section next-->
-        <section id="sectionstage">
-            <article>
-                <section id="sectionstage2">
-                    <div class="stages">
-                        <h3>Trouver un Stage</h3>
-                        <p>
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <p>
-                            tester tester tester >
-                        </p>
-                        <a class="button">click here</a>
-                    </div>
-                    <div id="player" class="video"></div>
-                </section>
-            </article>
-        </section>
-
-        <section id="sectionstage">
-            <article>
-                <section id="sectionstage2">
-                    <div class="stages">
-                        <h3>Trouver un Stage</h3>
-                        <p>
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <p>
-                            tester tester tester >
-                        </p>
-                        <a class="button">click here</a>
-                    </div>
-                    <div id="player" class="video"></div>
-                </section>
-            </article>
+            <?php gethome(); ?>
         </section>
 </body>
 
 <?php
-    include ("include/footer.php");
+include("include/footer.php");
 ?>
 
-<script src="index.js"></script>
-
+<script src="video.js"></script>
 </html>
