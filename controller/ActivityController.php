@@ -8,6 +8,8 @@ class ActivityController {
     
     public function index () {
         $activities = $this->dao->fetchAll();
+        return $activities;
+        
         include('../view/activity/list.php');
     }
     
