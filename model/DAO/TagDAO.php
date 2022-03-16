@@ -1,6 +1,6 @@
 <?php
 
-class RoleDAO
+class TagDAO
 {
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
@@ -12,7 +12,7 @@ class RoleDAO
         $this->password = env('DB_PASSWORD', '');         //The password to connect to the DB
         $this->host =     env('DB_HOST', 'localhost');    //The name of the server where my DB is located
         $this->dbname =   env('DB_NAME');                 //The name of the DB you want to attack.
-        $this->table =    "role";                        // The table to attack
+        $this->table =    "tags";                        // The table to attack
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);;
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,13 +24,13 @@ class RoleDAO
             $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $Roles = array();
+            $Tags = array();
 
             foreach ($results as $result) {
-                array_push($Roles, $this->create($result));
+                array_push($Tags, $this->create($result));
             }
 
-            return $Roles;
+            return $Tags;
         } catch (PDOException $e) {
             var_dump($e);
         }
@@ -39,7 +39,7 @@ class RoleDAO
     public function fetch($id)
     {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE Role_ID = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE Tag_ID = ?");
             $statement->execute([$id]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -55,9 +55,9 @@ class RoleDAO
             return false;
         }
 
-        return new Role(
-            $result['Role_ID'],
-            $result['Role_Name']
+        return new Tag(
+            $result['Tag_ID'],
+            $result['Tag_Name']
         );
     }
 }

@@ -1,5 +1,4 @@
 <?php
-require_once('DAO.php');
 
 class ActivityDAO {
 
@@ -20,7 +19,7 @@ class ActivityDAO {
 
     public function fetchAll(){
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} where Activity_Statut	= 1");
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $activities = array();
@@ -53,17 +52,21 @@ class ActivityDAO {
         if (!$result) {
             return false;
         }
-        
+
+        // var_dump($result);
+
         // NOTE DUMP OF OBJECT CREATE 
         // var_dump($result);
         return new Activity(
-            $result['Activity_ID'],
-            $result['Activity_Name'],
-            $result['Activity_Description'],
-            $result['Activity_Statut'],
-            $result['Activity_Content'],
-            $result['Activity_Type'],
-            $result['Activity_Date']
+            $result['Activity_ID'          ],
+            $result['Activity_Name'        ],
+            $result['Activity_Description' ],
+            $result['Activity_Statut'      ],
+            $result['Activity_Content'     ],
+            $result['Activity_Type'        ],
+            $result['Activity_Date'        ],
+            $result['Activity_Price'       ],
+            $result['Activity_Media'       ]
         );
     }
 
@@ -84,31 +87,45 @@ class ActivityDAO {
 
     public function store($data)
     {
-        if (empty($data['name']) || empty($data['desc']) || empty($data['cont']) || empty($data['date']) || empty($data['type']) || empty($data['stat'])) {
+        unset($_POST);
+
+        if (empty($data)) {
+            return false;
+        }
+
+        $data = checkinput($data);
+
+        //Check Error
+        $error = checkerror('activity', $data['error']);
+
+        if ($error === false) {
             return false;
         }
 
         $activity = $this->create([
-            "_name" =>        $data["name"],
-            "_description" => $data["desc"],
-            "_content" =>     $data["cont"],
-            "_date" =>        $data["date"],
-            "_type" =>        $data["type"],
-            "_statut" =>      $data["stat"],
-            "_id" =>          0
+            "Activity_Name" =>        $data["name"],
+            "Activity_Description" => $data["desc"],
+            "Activity_Content" =>     $data["content"],
+            "Activity_Date" =>        $data["date"],
+            "Activity_Type" =>        $data["type"],
+            "Activity_Statut" =>      $data["statut"],
+            "Activity_Price" =>       $data["price"],
+            "Activity_Media" =>       $data["Media"],
+            "Activity_ID" =>          0
         ]);
 
         if ($activity) {
             try {
-                $statement = $this->connection->prepare("INSERT INTO {$this->table} (activity_Mail, activity_Login, activity_Password, activity_Name, activity_Firstname, activity_Role) VALUES (?, ?, ?, ?, ?, ?)");
+                $statement = $this->connection->prepare("INSERT INTO {$this->table} (Activity_Name, Activity_Description, Activity_Statut, Activity_Content, Activity_Type, Activity_Date, Activity_Price) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $statement->execute([
                     $activity->_name,
                     $activity->_description,
                     $activity->_statut,
                     $activity->_content,
-                    $activity->_date,
                     $activity->_type,
-                    $activity->_id
+                    $activity->_date,
+                    $activity->_price,
+                    $activity->_media
                 ]);
 
                 $activity->id = $this->connection->lastInsertId();
@@ -118,6 +135,8 @@ class ActivityDAO {
                 return false;
             }
         }
+
+        unset($_POST);
     }
 
     public function update($id, $data)
@@ -134,6 +153,8 @@ class ActivityDAO {
             "_date" => $data["date"],
             "_type" => $data["type"],
             "_statut" => $data["stat"],
+            "_price" => $data["price"],
+            "_media" => $data["media"],
         ]);
 
         if ($activity) {
@@ -146,6 +167,8 @@ class ActivityDAO {
                     $activity->_content,
                     $activity->_date,
                     $activity->_type,
+                    $activity->_price,
+                    $activity->_media,
                     $activity->_id
                 ]);
 

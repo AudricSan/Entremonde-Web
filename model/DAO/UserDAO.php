@@ -1,5 +1,4 @@
 <?php
-require_once('DAO.php');
 
 class UserDAO{
     //DON'T TOUCH IT, LITTLE PRICK
@@ -83,6 +82,8 @@ class UserDAO{
     }
 
     public function store($data){
+        unset($_POST);
+
         if (empty($data)){
             return false;
         }
@@ -93,7 +94,7 @@ class UserDAO{
             return false;
         }
 
-        $user = $this->create([
+        $user = $this->create([ 
             'User_ID'         => 0,
             'User_Name'      => $data['name'],
             'User_Firstname' => $data['fname'],

@@ -33,7 +33,6 @@ include('../model/Class/Tag.php');
 require('../model/DAO/TagDAO.php');
 require('../controller/TagController.php');
 
-include("include/header.php");
 ?>
 
 <!DOCTYPE HTML>
@@ -59,12 +58,12 @@ include("include/header.php");
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
 </head>
 
-
-
 <body>
     <div class="open"></div>
     <div class="container">
 
+    <?php include("include/header.php"); ?>
+      
         <!-- Intro -->
         <section id="accroche">
             <p>stages, anniv</p>
