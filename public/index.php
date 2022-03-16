@@ -33,31 +33,12 @@ include('../model/Class/Tag.php');
 require('../model/DAO/TagDAO.php');
 require('../controller/TagController.php');
 
-
-// $admin = new AdminController();
-// // $admin->show(1);
-// $admin->index();
-
-// $user = new UserController();
-// // $user->show(1);
-// $user->index();
-
-// $activity = new ActivityController();
-// // $activity->show(1);
-// $activity->index();
-
-// $picture = new PictureController();
-// // $picture->show(1);
-// $picture->index();
-
-// // $admin->create();
-// // $user->create();
-// // $activity->create();
-// // $picture->create();
 ?>
 
 <!DOCTYPE HTML>
 <html lang="fr">
+
+
 
 <head>
     <meta charset="utf-8">
@@ -84,9 +65,9 @@ require('../controller/TagController.php');
 <body>
     <div class="open"></div>
     <div class="container">
-        <?php
-        include("include/header.php");
-        ?>
+
+    <?php include("include/header.php"); ?>
+
         <!-- Intro -->
         <section id="accroche">
             <p>stages, anniv</p>
@@ -100,9 +81,7 @@ require('../controller/TagController.php');
         </section>
 </body>
 
-<?php
-include("include/footer.php");
-?>
+<?php include("include/footer.php"); ?>
 
 <script src="video.js"></script>
 </html>
