@@ -1,5 +1,4 @@
 <?php
-require_once('DAO.php');
 
 class AdminDAO {
     //DON'T TOUCH IT, LITTLE PRICK
@@ -85,8 +84,9 @@ class AdminDAO {
 
     public function store($data)
     {
+        unset($_POST);
 
-        if (empty($data['name']) || empty($data['fname']) || empty($data['mail']) || empty($data['pass']) || empty($data['role'])) {
+        if (empty($data)) {
             return false;
         }
 

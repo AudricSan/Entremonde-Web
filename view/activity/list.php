@@ -2,13 +2,14 @@
     <ul>
     <?php foreach($activities as $activity): ?>
         <li>
-            <?= $activity->_name;?>
-            <?= $activity->_firstname;?>
-            <?= $activity->_login;?>
-            <?= $activity->_password;?>
-            <?= $activity->_email;?>
-            <?= $activity->_bank;?>
-            <?= $activity->_activity;?>
+            <?= $activity->_ID;?>
+            <?= $activity->_Name;?>
+            <?= $activity->_Description;?>
+            <?= $activity->_Statut;?>
+            <?= $activity->_Content;?>
+            <?= $activity->_Type;?>
+            <?= $activity->_Date;?>
+            <?= $activity->_Price;?>   
         </li>
     <?php endforeach; ?>
     </ul>
