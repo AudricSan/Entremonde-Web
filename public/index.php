@@ -33,37 +33,8 @@ include('../model/Class/Tag.php');
 require('../model/DAO/TagDAO.php');
 require('../controller/TagController.php');
 
-?>
+include("include/header.php"); ?>
 
-<!DOCTYPE HTML>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <title>Entremonde</title>
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="keywords" content="référencement,SEO,balise meta keywords">
-    <meta name="description" content="Free Web tutorials">
-    <meta name="auteur" content="Xavier Deleclos">
-
-    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" /> -->
-
-    <!--icones importées-->
-    <script src="https://kit.fontawesome.com/3d76d9e733.js" crossorigin="anonymous"></script>
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
-</head>
-
-<body>
-    <div class="open"></div>
-    <div class="container">
-
-    <?php include("include/header.php"); ?>
-      
         <!-- Intro -->
         <section id="accroche">
             <p>stages, anniv</p>
