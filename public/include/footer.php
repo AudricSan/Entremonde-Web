@@ -5,14 +5,9 @@
         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
     </ul>
 
-    <div>
-        <p>Mentions légales, ect. | &copy; Xavier Deleclos
-            <br /><br /> IFOSUP - Le 16 Juin 2021
-        </p>
-    </div>
+    <p>Mentions légales, ect. | &copy; Xavier Deleclos</p>
+    <p>IFOSUP - Le 16 Juin 2021</p>
 
-    <p>
-        <a href=#header class="fas fa-arrow-up arrowUp"></a> <i></i>
-    </p>
+    <a href=#header class="fas fa-arrow-up arrowUp"></a>
 
 </footer>
