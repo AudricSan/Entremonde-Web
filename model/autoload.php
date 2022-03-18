@@ -1,5 +1,38 @@
 <?php
 
+include_once('../model/Class/Admin.php');
+include_once('../model/DAO/AdminDAO.php');
+include_once('../controller/AdminController.php');
+
+include_once('../model/Class/User.php');
+include_once('../model/DAO/UserDAO.php');
+include_once('../controller/UserController.php');
+
+include_once('../model/Class/Activity.php');
+include_once('../model/DAO/ActivityDAO.php');
+include_once('../controller/ActivityController.php');
+
+include_once('../model/Class/Picture.php');
+include_once('../model/DAO/PictureDAO.php');
+include_once('../controller/PictureController.php');
+
+include_once('../model/Class/Role.php');
+include_once('../model/DAO/RoleDAO.php');
+include_once('../controller/RoleController.php');
+
+include_once('../model/Class/Statut.php');
+include_once('../model/DAO/StatutDAO.php');
+include_once('../controller/StatutController.php');
+
+include_once('../model/Class/Type.php');
+include_once('../model/DAO/TypeDAO.php');
+include_once('../controller/TypeController.php');
+
+include_once('../model/Class/Tag.php');
+include_once('../model/DAO/TagDAO.php');
+include_once('../controller/TagController.php');
+
+
 if (file_exists('../env.php')) {
     if (!function_exists('env')) {
         function env($key, $default = null)
