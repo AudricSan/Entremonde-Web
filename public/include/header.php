@@ -9,6 +9,7 @@
     //CSS link//
     $anim_css = $root   . 'public/css/anim.css';
     $style_css = $root   . 'public/css/index.css';
+    $globals_css = $root   . 'public/css/globals.css';
 
     //OtherVar//
     $autor = 'Audric Rosier, Xavier Deleclos';
@@ -36,6 +37,7 @@ echo "
         <meta name='auteur' content='$autor'>
 
         <!-- <link rel='stylesheet' type='text/css' href='css/reset.css' /> -->
+        <link rel='stylesheet' type='text/css' href='$globals_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$style_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$anim_css' media='screen' />
 
@@ -45,14 +47,13 @@ echo "
     </head>
     ";
 
-
     echo "
         <body>
         <div class='open'></div>
         <div class='container'>
             <header id='header'>
                 <nav>
-                    <figure id='logo'><a href='#'><img src='images/logo.jpg' alt='Logo' title='Company name' width='200'></a></figure>
+                    <figure id='logo'><a href='/'><img src='images/logo.jpg' alt='Logo' title='Company name' width='200'></a></figure>
                     <ul class='navigation'>
                         <li><a href='#'>Onglet 1</a></li>
                         <li><a href='#contenu'>Onglet 2</a></li>
