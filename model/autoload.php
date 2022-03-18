@@ -51,8 +51,12 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
-    if ($data['hum'] !== 'on'){
+    if (!isset($data['human'])) {
         return false;
+    } else {
+        if ($data['human'] !== 'on') {
+            return false;
+        }
     }
 
     unset($_POST);
@@ -120,7 +124,7 @@ function checkinput($data)
     }
 
     //Regex
-    $nregex = "/^[a-z 0-9-]{2,15}$/";
+    $nregex = "/^[a-zA-Z0-9-]{2,15}$/";
     $mregex = "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/";
     $pregex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10,}$/";
 
@@ -143,17 +147,29 @@ function checkinput($data)
     $firstname  = strtolower($firstname);
     $mail       = strtolower($mail);
 
+    //confert Data
+    $name = ucfirst($name);
+    $firstname = ucfirst($firstname);
+
+    //Generate Login
+    $lfname = substr($firstname, 0, 3);
+    $lname = substr($name, 0, 3);
+    $login = $lname . $lfname . random_int(0, 999);
+    // $login = substr($login, 0, 9);
+
     //Check data format
     if (preg_match($nregex, $name)) {
         $error['name'] = true;
     } else {
         $error['name'] = false;
+        $name=false;
     }
 
     if (preg_match($mregex, $mail)) {
         $error['mail'] = true;
     } else {
         $error['mail'] = false;
+        $mail=false;
     }
 
     if ($pass === $pass2) {
@@ -164,41 +180,47 @@ function checkinput($data)
             $error['pass'] = true;
         } else {
             $error['pass'] = false;
+            $pass=false;
         }
     } else {
         $error['pass'] = false;
+        $pass=false;
     }
 
     if (strlen($content) > 0) {
         $error['content'] = true;
     } else {
         $error['content'] = false;
+        $content=false;
     }
 
     if (strlen($desc) > 0) {
         $error['desc'] = true;
     } else {
         $error['desc'] = false;
+        $desc=false;
     }
 
     if ($price > 0) {
         $error['price'] = true;
     } else {
         $error['price'] = false;
+        $prise=false;
     }
-    
+
     if ($tag > 0) {
         $error['tags'] = true;
     } else {
         $error['tags'] = false;
+        $tag=false;
     }
-    
+
     if ($statut > 0) {
         $error['statut'] = true;
     } else {
         $error['statut'] = false;
+        $statut=false;
     }
-
 
     //Picture Check ==> Picture Formater
     if (empty($image)) {
@@ -228,16 +250,6 @@ function checkinput($data)
         }
     }
 
-    //confert Data
-    $name = ucfirst($name);
-    $firstname = ucfirst($firstname);
-
-    //Generate Login
-    $lfname = substr($firstname, 0, 3);
-    $lname = substr($name, 0, 3);
-    $login = $lname . $lfname . random_int(0, 999);
-    // $login = substr($login, 0, 9);
-
     //Return Data
     $data = array();
 
@@ -266,6 +278,7 @@ function checkinput($data)
     $data['link']           = isset($image)     ? $image     : false;
 
     unset($_POST);
+
     return $data;
 }
 
@@ -277,7 +290,7 @@ function checkerror($for, $error)
     switch ($for) {
         case 'user':
         case 'admin':
-            if ($error['name'] !== true || $error['mail'] !== true || $error['pass'] !== true) {
+            if ($error['name'] === false || $error['mail'] === false || $error['pass'] === false) {
                 $result = false;
             } else {
                 $result = true;
@@ -285,7 +298,7 @@ function checkerror($for, $error)
             break;
 
         case 'activity':
-            if ($error['name'] !== true || $error['desc'] !== true || $error['content'] !== true || $error['price'] !== true) {
+            if ($error['name'] !== false || $error['desc'] !== false || $error['content'] !== false || $error['price'] !== false) {
                 $result = false;
             } else {
                 $result = true;
@@ -293,7 +306,7 @@ function checkerror($for, $error)
             break;
 
         case 'picture':
-            if ($error['name'] !== true || $error['desc'] !== true || $error['statut'] !== true || $error['tags'] !== true || $error['image'] !== true) {
+            if ($error['name'] !== false || $error['desc'] !== false || $error['statut'] !== false || $error['tags'] !== false || $error['image'] !== false) {
                 $result = false;
             } else {
                 $result = true;
@@ -305,10 +318,12 @@ function checkerror($for, $error)
             break;
     }
 
+    var_dump($result);
     return $result;
 }
 
-function gethome(){
+function gethome()
+{
     $activity = new ActivityController();
     $activity = $activity->index();
     // var_dump($activity);

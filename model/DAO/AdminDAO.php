@@ -87,12 +87,18 @@ class AdminDAO {
         unset($_POST);
 
         if (empty($data)) {
+            unset($data);
+            unset($_POST);
             return false;
         }
 
         $data = checkinput($data);
+        $error = checkerror('admin', $data['error']);
 
-        if ($data === false) {
+        var_dump($data);
+        var_dump($error);
+        
+        if ($error === false) {
             return false;
         }
 

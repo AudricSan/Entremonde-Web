@@ -11,6 +11,10 @@
     $style_css = $root   . 'public/css/index.css';
     $globals_css = $root   . 'public/css/globals.css';
 
+
+
+    $debug_css = $root   . 'public/css/debug.css';
+
     //OtherVar//
     $autor = 'Audric Rosier, Xavier Deleclos';
     $description = 'Site internet de Entremonde ASBL';
@@ -40,6 +44,7 @@ echo "
         <link rel='stylesheet' type='text/css' href='$globals_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$style_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$anim_css' media='screen' />
+        <link rel='stylesheet' type='text/css' href='$debug_css' media='screen' />
 
         <!--icones importées-->
         <script src='https://kit.fontawesome.com/3d76d9e733.js' crossorigin='anonymous'></script>
