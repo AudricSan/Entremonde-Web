@@ -55,5 +55,6 @@ if (isset($_POST)) {
     <label for="date">Activity Date: </label>
     <input type="date" name="date" id="date"> <br>
 
+    <input type="checkbox" name="hum" id="hum" checked style="display: none;">
     <input type="submit" value="Send">
 </form>
