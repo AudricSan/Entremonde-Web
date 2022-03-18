@@ -50,7 +50,7 @@ function checkinput($data)
     //Picture
     $tag       = isset($data['tags'])          ? $data['tags']          : false;
     $image     = isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : false;
-    $imagePath          = '../view/picture/store/' . basename($image);
+    $imagePath          = '../public/img/store/' . basename($image);
     $imageExtension     = pathinfo($imagePath, PATHINFO_EXTENSION);
     $isSuccess          = true;
     $isUploadSuccess    = false;
