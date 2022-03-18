@@ -18,6 +18,10 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
+    if ($data['hum'] !== 'on'){
+        return false;
+    }
+
     unset($_POST);
 
     // var_dump($data);
