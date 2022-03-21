@@ -162,64 +162,64 @@ function checkinput($data)
         $error['name'] = true;
     } else {
         $error['name'] = false;
-        $name=false;
+        $name = false;
     }
 
     if (preg_match($mregex, $mail)) {
         $error['mail'] = true;
     } else {
         $error['mail'] = false;
-        $mail=false;
+        $mail = false;
     }
 
     if ($pass === $pass2) {
         unset($pass2);
 
         if (preg_match($pregex, $pass)) {
-            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            $pass = password_hash($pass, PASSWORD_BCRYPT);
             $error['pass'] = true;
         } else {
             $error['pass'] = false;
-            $pass=false;
+            $pass = false;
         }
     } else {
         $error['pass'] = false;
-        $pass=false;
+        $pass = false;
     }
 
     if (strlen($content) > 0) {
         $error['content'] = true;
     } else {
         $error['content'] = false;
-        $content=false;
+        $content = false;
     }
 
     if (strlen($desc) > 0) {
         $error['desc'] = true;
     } else {
         $error['desc'] = false;
-        $desc=false;
+        $desc = false;
     }
 
     if ($price > 0) {
         $error['price'] = true;
     } else {
         $error['price'] = false;
-        $prise=false;
+        $prise = false;
     }
 
     if ($tag > 0) {
         $error['tags'] = true;
     } else {
         $error['tags'] = false;
-        $tag=false;
+        $tag = false;
     }
 
     if ($statut > 0) {
         $error['statut'] = true;
     } else {
         $error['statut'] = false;
-        $statut=false;
+        $statut = false;
     }
 
     //Picture Check ==> Picture Formater
@@ -349,5 +349,55 @@ function gethome()
 
             <div class='player' id=$value->_media></div>
         </article>";
+    }
+}
+
+function checklog($login)
+{
+    $mregex = "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/";
+
+    if (preg_match($mregex, $login)) {
+        return 'mail';
+    } else {
+        return 'login';
+    }
+}
+
+function existadmin($data)
+{
+    $admin = new AdminController();
+    $admins = $admin->index();
+    $login = checklog($data);
+
+    $adminMail = array();
+    foreach ($admins as $key => $value) {
+        array_push($adminMail, $value->_email);
+    }
+
+    $adminLogin = array();
+    foreach ($admins as $key => $value) {
+        array_push($adminLogin, $value->_login);
+    }
+
+    switch ($login) {
+        case 'mail':
+            if (in_array($data, $adminMail)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+
+        case 'login':
+            if (in_array($data, $adminLogin)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+
+        default:
+            return false;
+            break;
     }
 }
