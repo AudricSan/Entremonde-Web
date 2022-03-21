@@ -1,5 +1,6 @@
 <?php
     include_once('../model/autoload.php');
+    session_start();
 
     // var_dump($_SERVER);
     $root = 'http://' . $_SERVER['HTTP_HOST'] . '/';
@@ -69,7 +70,7 @@ echo "
                     </ul>
 
                     <ul class='navigation'>
-                        <li><a href='/view/login'> Connection </a></li>
+                        <li><a href='/user/login'> Connection </a></li>
                         <li><a href='/view/insciption'> Inscription </a></li>
                     </ul>
                 </nav>
