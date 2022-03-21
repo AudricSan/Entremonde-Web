@@ -8,6 +8,8 @@ class AdminController {
     
     public function index () {
         $admins = $this->dao->fetchAll();
+        return $admins;
+        
         include('../view/admin/list.php');
     }
     
@@ -23,6 +25,18 @@ class AdminController {
     public function store($data) {
         if(isset($data)){
             $this->dao->store($data);
+        }
+    }
+
+    public function login($data)
+    {
+        unset($_POST);        
+        $result = $this->dao->login($data);
+
+        if ($result) {
+            header('location: /admin');
+        }else{
+            header('location: /');
         }
     }
 }
