@@ -34,5 +34,8 @@ class UserController
     {
         unset($_POST);
         var_dump($data);
+        
+        // $data $this->dao->login($data);
+
     }
 }
