@@ -13,6 +13,7 @@
 <section id="sectionstage">
     <?php gethome(); ?>
 </section>
+</div>
 </body>
 
 <?php include("include/footer.php"); ?>
