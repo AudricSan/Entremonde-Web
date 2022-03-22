@@ -9,7 +9,7 @@ if (empty($_SESSION)) {
 
 } else {
     if (existadmin($_SESSION['admin'])) {
-        echo ('COUCOU admin : ' . $_SESSION['admin']);
+        // echo ('COUCOU admin : ' . $_SESSION['admin']);
 
     } else {
         unset($_SERVER['admin']);
@@ -18,7 +18,11 @@ if (empty($_SESSION)) {
 }
 ?>
 
+<section>
+<h1>Admin Connected</h1>
 
+
+</section>
 
 
 </div>
