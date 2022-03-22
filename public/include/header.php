@@ -53,7 +53,8 @@ echo "
     </head>
     ";
 
-    echo "
+    if ($title != 'admin') {
+        echo "
         <body>
         <div class='open'></div>
         <div class='container'>
@@ -76,4 +77,4 @@ echo "
                 </nav>
             </header>
     ";
-?>
+        }
