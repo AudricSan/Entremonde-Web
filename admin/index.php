@@ -1,8 +1,8 @@
 <?php
-session_start();
-// var_dump($_SESSION);
 
-include('../model/autoload.php');
+$title = "admin";
+include_once("../public/include/header.php");
+// include('../model/autoload.php');
 
 if (empty($_SESSION)) {
     header('location: login.php');
@@ -16,3 +16,13 @@ if (empty($_SESSION)) {
         header('location: /');
     }
 }
+?>
+
+
+
+
+</div>
+</body>
+
+<?php include("../public/include/footer.php"); ?>
+</html>
