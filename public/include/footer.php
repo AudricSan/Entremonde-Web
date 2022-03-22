@@ -9,5 +9,4 @@
     <p>IFOSUP - Le 16 Juin 2021</p>
 
     <a href=#header class="fas fa-arrow-up arrowUp"></a>
-
 </footer>
