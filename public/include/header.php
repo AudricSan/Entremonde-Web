@@ -1,30 +1,30 @@
 <?php
-    include_once('../model/autoload.php');
-    session_start();
+include_once('../model/autoload.php');
+session_start();
 
-    // var_dump($_SERVER);
-    $root = 'http://' . $_SERVER['HTTP_HOST'] . '/';
-    $_SESSION['root'] = $root;
+// var_dump($_SERVER);
+$root = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+$_SESSION['root'] = $root;
 
-    // var_dump($root);
-    //CSS link//
-    $anim_css = $root   . 'public/css/anim.css';
-    $style_css = $root   . 'public/css/index.css';
-    $globals_css = $root   . 'public/css/globals.css';
+// var_dump($root);
+//CSS link//
+$anim_css = $root   . 'public/css/anim.css';
+$style_css = $root   . 'public/css/index.css';
+$globals_css = $root   . 'public/css/globals.css';
 
 
 
-    $debug_css = $root   . 'public/css/debug.css';
+$debug_css = $root   . 'public/css/debug.css';
 
-    //OtherVar//
-    $autor = 'Audric Rosier, Xavier Deleclos';
-    $description = 'Site internet de Entremonde ASBL';
-    $keyword = 'SEO, keyword';
+//OtherVar//
+$autor = 'Audric Rosier, Xavier Deleclos';
+$description = 'Site internet de Entremonde ASBL';
+$keyword = 'SEO, keyword';
 
-    //TITLE//
-    if(!isset($title)){
-        $title = 'Entremonde ASBL';
-    }
+//TITLE//
+if (!isset($title)) {
+    $title = 'Entremonde ASBL';
+}
 
 echo "
     <!DOCTYPE HTML>
@@ -51,10 +51,10 @@ echo "
         <script src='https://kit.fontawesome.com/3d76d9e733.js' crossorigin='anonymous'></script>
         <!--<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>-->
     </head>
-    ";
+";
 
-    if ($title != 'admin') {
-        echo "
+if ($title != 'admin') {
+    echo "
         <body>
         <div class='open'></div>
         <div class='container'>
@@ -77,4 +77,28 @@ echo "
                 </nav>
             </header>
     ";
-        }
+} else {
+    echo "
+        <body>
+        <div class='open'></div>
+        <div class='container'>
+            <header id='header'>
+                <nav>
+                    <figure id='logo'><a href='/'><img src='images/logo.jpg' alt='Logo' title='Company name' width='200'></a></figure>
+                    <ul class='navigation'>
+                        <li><a href='#'> Admin NAV </a></li>
+                        <li><a href='#'> Admin NAV </a></li>
+                        <li><a href='#'> Admin NAV </a></li>
+                        <li><a href='#'> Admin NAV </a></li>
+                        <li><a href='#'> Admin NAV </a></li>
+                        <li><a href='#'> Admin NAV </a></li>
+                    </ul>
+
+                    <ul class='navigation'>
+                        <li><a href='/admin/disc'> Disconnect </a></li>
+                        <li><a href='/admin/add'> Add new Admin </a></li>
+                    </ul>
+                </nav>
+            </header>
+    ";
+}
