@@ -21,7 +21,7 @@ class PictureDAO
     public function fetchAll()
     {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM {$this->table}");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} where Picture_Statut	= 1");
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $Pictures = array();

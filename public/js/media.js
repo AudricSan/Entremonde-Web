@@ -21,7 +21,15 @@ function mediagenarate(div) {
     
         } else {
             console.log('Local IMG');
-            src = 'img/' + divlist[index].id + ".png";
+
+            let x = document.cookie;
+            x = x.split(';');
+            x = x[0].split('=');
+            x = x[1];
+            x = (decodeURIComponent(x));
+            console.log(x);
+
+            src = x + '/' + divlist[index].id + ".jpg";
 
             media = document.createElement('img');
             media.setAttribute('id', 'player');

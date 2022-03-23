@@ -1,6 +1,7 @@
 <?php
 
-class AdminDAO {
+class AdminDAO
+{
     //DON'T TOUCH IT, LITTLE PRICK
     private $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 
@@ -87,12 +88,18 @@ class AdminDAO {
         unset($_POST);
 
         if (empty($data)) {
+            unset($data);
+            unset($_POST);
             return false;
         }
 
         $data = checkinput($data);
+        $error = checkerror('admin', $data['error']);
 
-        if ($data === false) {
+        var_dump($data);
+        var_dump($error);
+
+        if ($error === false) {
             return false;
         }
 
@@ -163,5 +170,55 @@ class AdminDAO {
                 return false;
             }
         }
+    }
+
+    public function login($data)
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        $login      = $data['login'];
+        $password   = $data['pass'];
+        unset($data);
+
+        $data = checklog($login);
+        var_dump($data);
+
+        if ($data === 'login') {
+            try {
+                $statement = $this->connection->prepare("Select Admin_Password FROM {$this->table} WHERE Admin_Login = ?");
+                $statement->execute([
+                    $login
+                ]);
+
+                $hash = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                var_dump($e->getMessage());
+            }
+        } elseif ($data === 'mail') {
+            try {
+                $statement = $this->connection->prepare("Select Admin_Password FROM {$this->table} WHERE Admin_Mail = ?");
+                $statement->execute([
+                    $login
+                ]);
+
+                $hash = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                var_dump($e->getMessage());
+            }
+        } else {
+            return false;
+        }
+
+        $pass = password_verify($password, $hash['Admin_Password']);
+
+        if ($pass === false) {
+            return false;
+        }
+
+        unset($_POST);
+        $_SESSION['admin'] = $login;
+        return true;
     }
 }
