@@ -2,7 +2,11 @@
 
 $social = env('SOCIAL');
 
-echo "<footer>";
+echo "
+</div>
+</body>
+<footer>";
+
 if ($social['SOCIAL'] === true) {
     echo "<ul id='reseaux'>";
     foreach ($social as $key => $value) {
@@ -22,4 +26,5 @@ echo "
 
     <a href=#header class='fas fa-arrow-up arrowUp'></a>
     </footer>
+    </html>
     ";
