@@ -18,6 +18,6 @@
 
 <?php include("include/footer.php"); ?>
 
-<script src="video.js"></script>
+<script src="js/media.js"></script>
 
 </html>
