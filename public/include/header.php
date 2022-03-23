@@ -1,6 +1,7 @@
 <?php
-include_once('../model/autoload.php');
 session_start();
+require_once('../model/autoload.php');
+
 
 // var_dump($_SERVER);
 $root = 'http://' . $_SERVER['HTTP_HOST'] . '/';
@@ -13,13 +14,17 @@ $style_css = $root   . 'public/css/index.css';
 $globals_css = $root   . 'public/css/globals.css';
 
 
-
-$debug_css = $root   . 'public/css/debug.css';
-
 //OtherVar//
 $autor = 'Audric Rosier, Xavier Deleclos';
 $description = 'Site internet de Entremonde ASBL';
 $keyword = 'SEO, keyword';
+$imglink = $_SESSION['root'] . 'public/img';
+
+$imglink = urldecode($imglink);
+
+if(!isset($_COOKIE['rootimg'])) {
+    setcookie("rootimg", $imglink);
+}
 
 //TITLE//
 if (!isset($title)) {
@@ -45,7 +50,6 @@ echo "
         <link rel='stylesheet' type='text/css' href='$globals_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$style_css' media='screen' />
         <link rel='stylesheet' type='text/css' href='$anim_css' media='screen' />
-        <link rel='stylesheet' type='text/css' href='$debug_css' media='screen' />
 
         <!--icones importées-->
         <script src='https://kit.fontawesome.com/3d76d9e733.js' crossorigin='anonymous'></script>
@@ -57,48 +61,46 @@ if ($title != 'admin') {
     echo "
         <body>
         <div class='open'></div>
-        <div class='container'>
-            <header id='header'>
-                <nav>
-                    <figure id='logo'><a href='/'><img src='images/logo.jpg' alt='Logo' title='Company name' width='200'></a></figure>
-                    <ul class='navigation'>
-                        <li><a href='#'>Onglet 1</a></li>
-                        <li><a href='#contenu'>Onglet 2</a></li>
-                        <li><a href='#produits'>Onglet 3</a></li>
-                        <li><a href='#galerie'>Onglet 4</a></li>
-                        <li><a href='#texte-images'>Onglet 5</a></li>
-                        <li><a href='#reseaux'> CONTACT</a></li>
-                    </ul>
+        <header id='header'>
+            <nav>
+                <figure id='logo'><a href='/'><img src='$imglink/logo.png' alt='Logo' title='Entremonde ASBL Logo''></a></figure>
+                <ul class='navigation'>
+                    <li><a href='/view/about'>About Us</a></li>
+                    <li><a href='/view/activities'>Activities</a></li>
+                    <li><a href='/view/contact'>Contact</a></li>
+                    <li><a href='/view/gallery'>Gallery</a></li>
+                </ul>
 
-                    <ul class='navigation'>
-                        <li><a href='/user/login'> Connection </a></li>
-                        <li><a href='/view/insciption'> Inscription </a></li>
-                    </ul>
-                </nav>
-            </header>
+                <ul class='navigation'>
+                    <li><a href='/user/login'> Connection </a></li>
+                    <li><a href='/view/insciption'> Inscription </a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class='container'>
     ";
 } else {
     echo "
         <body>
         <div class='open'></div>
-        <div class='container'>
-            <header id='header'>
-                <nav>
-                    <figure id='logo'><a href='/'><img src='images/logo.jpg' alt='Logo' title='Company name' width='200'></a></figure>
-                    <ul class='navigation'>
-                        <li><a href='#'> Admin NAV </a></li>
-                        <li><a href='#'> Admin NAV </a></li>
-                        <li><a href='#'> Admin NAV </a></li>
-                        <li><a href='#'> Admin NAV </a></li>
-                        <li><a href='#'> Admin NAV </a></li>
-                        <li><a href='#'> Admin NAV </a></li>
-                    </ul>
+        <header id='header'>
+            <nav>
+                <figure id='logo'><a href='/'><img src='img/logo.png' alt='Logo' title='Entremonde ASBL Logo''></a></figure>
+                <ul class='navigation'>
+                    <li><a href='#'> Admin NAV </a></li>
+                    <li><a href='#'> Admin NAV </a></li>
+                    <li><a href='#'> Admin NAV </a></li>
+                    <li><a href='#'> Admin NAV </a></li>
+                    <li><a href='#'> Admin NAV </a></li>
+                    <li><a href='#'> Admin NAV </a></li>
+                </ul>
 
-                    <ul class='navigation'>
-                        <li><a href='/admin/disc'> Disconnect </a></li>
-                        <li><a href='/admin/add'> Add new Admin </a></li>
-                    </ul>
-                </nav>
-            </header>
+                <ul class='navigation'>
+                    <li><a href='/admin/disc'> Disconnect </a></li>
+                    <li><a href='/admin/add'> Add new Admin </a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class='container'>
     ";
 }
