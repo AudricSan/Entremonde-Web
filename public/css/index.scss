@@ -40,6 +40,14 @@ header {
 
         figure {
             margin: 1em;
+
+            img {
+                width: 100px;
+                height: 100px;
+
+                object-fit: cover;
+                object-position: 0px 0px;
+            }
         }
 
         ul {
@@ -254,5 +262,7 @@ footer {
         font-size: 30px;
         margin-top: 1%;
         margin-bottom: 2%;
+
+        text-decoration: none;
     }
 }

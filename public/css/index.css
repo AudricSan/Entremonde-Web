@@ -54,6 +54,15 @@ header nav figure {
   margin: 1em;
 }
 
+header nav figure img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 0px 0px;
+     object-position: 0px 0px;
+}
+
 header nav ul {
   list-style-type: none;
   padding: 0em;
@@ -317,5 +326,6 @@ footer .arrowUp {
   font-size: 30px;
   margin-top: 1%;
   margin-bottom: 2%;
+  text-decoration: none;
 }
 /*# sourceMappingURL=index.css.map */
