@@ -32,7 +32,6 @@ include_once('../model/Class/Tag.php');
 include_once('../model/DAO/TagDAO.php');
 include_once('../controller/TagController.php');
 
-
 if (file_exists('../env.php')) {
     if (!function_exists('env')) {
         function env($key, $default = null)
@@ -399,5 +398,70 @@ function existadmin($data)
         default:
             return false;
             break;
+    }
+}
+
+function getactivities()
+{
+    $activity = new ActivityController();
+    $activity = $activity->index();
+
+    foreach ($activity as $key => $value) {
+        $typeid = $value->_type;
+        $type = new TypeController;
+        $type = $type->show($typeid);
+        $type = $type->_name;
+
+        echo "
+            <article>
+                <div class='stages'>
+                    <h2> $value->_name </h2>
+                    
+                    <h3> Description : </h3>
+                    <p> $value->_description </p>
+
+                    <h3> Content : </h3>
+                    <p> $value->_content </p>
+                                    
+                    <h3> Date :</h3>
+                    <p> $value->_date </p>
+                    
+                    <h3> Activity Type :</h3>
+                    <p> $type </p>
+
+                    <h3> Prices :</h3>
+                    <p> $value->_price € </p>
+
+                    <p> $value->_media </p>
+    
+                    <a class='button' href='#'>More info</a>
+                </div>
+    
+                <div class='player' id=$value->_media></div>
+            </article>";
+    }
+}
+
+function getphoto(){
+
+    $picture = new PictureController();
+    $picture = $picture->index();
+
+    foreach ($picture as $key => $value) {
+
+        $tagid = $value->_tags;
+        $tag = new TagController;
+        $tag = $tag->show($tagid);
+        $tag = $tag->_name;
+
+        echo "
+            <article>
+                <div class='stages'>
+                    <p>$tag</p>
+                    <p>$value->_description</p>
+                    <a class='button' href='#'>click here</a>
+                </div>
+                <div class='player' id=$value->_link></div>
+            </article>";
     }
 }
