@@ -8,6 +8,8 @@ class PictureController {
     
     public function index () {
         $pictures = $this->dao->fetchAll();
+        return $pictures;
+        
         include('../view/picture/list.php');
     }
     
