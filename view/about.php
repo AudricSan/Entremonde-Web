@@ -1,58 +1,28 @@
-<?php ?>
+<?php
+$title = 'about us';
+include_once("../public/include/header.php");
+?>
 
-<meta charset="utf-8">
-<title>Entremonde ASBL</title>
-<link rel="stylesheet" href="css/index.css" type="text/css">
+<section class="about">
+    <h2>About us</h2>
+    <article>
+        <h3>lorem</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque molestias aut iure id saepe. Reiciendis
+            quidem animi a et. Dolor culpa magnam ipsum quaerat earum voluptatum qui cupiditate voluptatem vero.</p>
+        <h3>lorem</h3>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem nisi ad animi eveniet laboriosam reprehenderit
+            ullam harum, dolor quibusdam dicta saepe? Omnis accusantium qui totam dolore ipsum a doloremque esse.</p>
+        <h3>lorem</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit recusandae, deleniti quisquam et iste animi
+            iure, praesentium ea, ipsum odio nulla enim ab! Culpa consequatur, sed dicta nostrum debitis eos!</p>
+        <h3>lorem</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iste nihil beatae assumenda doloremque
+            ipsa, non aliquam minima aperiam blanditiis ratione? Eum ab accusantium fuga porro iste optio velit dolor.</p>
+        <h3>lorem</h3>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit, accusantium neque illum
+            laudantium voluptatum molestias eius, quasi rem voluptate ea similique. Dicta, similique sequi? Adipisci
+            itaque suscipit sit eius.</p>
+    </article>
+</section>
 
-<!--icones importées-->
-<script src="https://kit.fontawesome.com/3d76d9e733.js" crossorigin="anonymous"></script>
-<!-------------------------------------------Navigation---------------------------------------------------------->
-
-<div class="container">
-    <header id="header">
-        <nav>
-            <!-- Logo-->
-            <figure id="logo"><a href="#"><img src="images/logo.jpg" alt="Logo" title="Company name" width="50"></a></figure>
-            
-            <!--liste-->
-            <ul class="navigation">
-                <li><a href="index.php">Index</a></li>
-                <li><a href="activites.php">Activités</a></li>
-                <li><a href="medias.php">Médias</a></li>
-                <li><a href="contacts.php">Contacts</a></li>
-            </ul>
-        </nav>
-    </header>
-</div>
-
-<!-----------------------------------------Warning & Welcome------------------------------------------------------------->
-<div class="warning">
-    <p>ATTENTION : SITE EN COURS DE CONSTRUCTION</p>
-</div><br><br>
-
-<div class="welcome">
-    <h1>About US</h1>
-    <h2>Bienvenue sur Entremonde ASBL</h2>
-    <p>Entremonde ASBL : Site en construction <br><br> Bonne visite.</p>
-</div>
-
-<br><br>
-
-<footer class="foot">
-    <div id="reseaux">
-        <a><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-
-    <div>
-        <p>Mentions légales, ect. | &copy; Test
-            <br /><br /> Test2
-        </p>
-    </div>
-
-    <p>
-        <a href=#header class="fas fa-arrow-up arrowUp"></a> <i></i>
-    </p>
-
-</footer>
+<?php include_once("../public/include/footer.php"); ?>

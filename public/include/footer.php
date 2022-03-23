@@ -1,18 +1,30 @@
-<footer>
-    <ul id="reseaux">
-        <li><a><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-    </ul>
+<?php
 
-    <div>
-        <p>Mentions légales, ect. | &copy; Xavier Deleclos
-            <br /><br /> IFOSUP - Le 16 Juin 2021
-        </p>
-    </div>
+$social = env('SOCIAL');
 
-    <p>
-        <a href=#header class="fas fa-arrow-up arrowUp"></a> <i></i>
-    </p>
+echo "
+</div>
+</body>
+<footer>";
 
-</footer>
+if ($social['SOCIAL'] === true) {
+    echo "<ul id='reseaux'>";
+    foreach ($social as $key => $value) {
+        if ($key != 'SOCIAL') {
+            echo "
+                <li> <a href='$value'>$key</a></li>
+            ";
+        }
+    }
+
+    echo '</ul>';
+}
+
+echo "
+    <p>Mentions légales, ect. | &copy; Xavier Deleclos</p>
+    <p>IFOSUP - Le 16 Juin 2021</p>
+
+    <a href=#header class='fas fa-arrow-up arrowUp'></a>
+    </footer>
+    </html>
+    ";

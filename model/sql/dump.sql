@@ -60,3 +60,5 @@ INSERT INTO activity (Activity_ID, Activity_Name, Activity_Description, Activity
 ALTER TABLE activity ADD Activity_Price INT NULL AFTER Activity_Date;
 
 ALTER TABLE activity ADD Activity_Media VARCHAR(11) NOT NULL AFTER Activity_Price;
+
+ALTER TABLE activity CHANGE Activity_Description Activity_Description MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

@@ -1,5 +1,37 @@
 <?php
 
+include_once('../model/Class/Admin.php');
+include_once('../model/DAO/AdminDAO.php');
+include_once('../controller/AdminController.php');
+
+include_once('../model/Class/User.php');
+include_once('../model/DAO/UserDAO.php');
+include_once('../controller/UserController.php');
+
+include_once('../model/Class/Activity.php');
+include_once('../model/DAO/ActivityDAO.php');
+include_once('../controller/ActivityController.php');
+
+include_once('../model/Class/Picture.php');
+include_once('../model/DAO/PictureDAO.php');
+include_once('../controller/PictureController.php');
+
+include_once('../model/Class/Role.php');
+include_once('../model/DAO/RoleDAO.php');
+include_once('../controller/RoleController.php');
+
+include_once('../model/Class/Statut.php');
+include_once('../model/DAO/StatutDAO.php');
+include_once('../controller/StatutController.php');
+
+include_once('../model/Class/Type.php');
+include_once('../model/DAO/TypeDAO.php');
+include_once('../controller/TypeController.php');
+
+include_once('../model/Class/Tag.php');
+include_once('../model/DAO/TagDAO.php');
+include_once('../controller/TagController.php');
+
 if (file_exists('../env.php')) {
     if (!function_exists('env')) {
         function env($key, $default = null)
@@ -18,6 +50,14 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
+    if (!isset($data['human'])) {
+        return false;
+    } else {
+        if ($data['human'] !== 'on') {
+            return false;
+        }
+    }
+
     unset($_POST);
 
     // var_dump($data);
@@ -50,7 +90,7 @@ function checkinput($data)
     //Picture
     $tag       = isset($data['tags'])          ? $data['tags']          : false;
     $image     = isset($_FILES["image"]["name"]) ? $_FILES["image"]["name"] : false;
-    $imagePath          = '../view/picture/store/' . basename($image);
+    $imagePath          = '../public/img/store/' . basename($image);
     $imageExtension     = pathinfo($imagePath, PATHINFO_EXTENSION);
     $isSuccess          = true;
     $isUploadSuccess    = false;
@@ -83,7 +123,7 @@ function checkinput($data)
     }
 
     //Regex
-    $nregex = "/^[a-z 0-9-]{2,15}$/";
+    $nregex = "/^[a-zA-Z0-9-]{2,15}$/";
     $mregex = "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/";
     $pregex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{10,}$/";
 
@@ -106,62 +146,80 @@ function checkinput($data)
     $firstname  = strtolower($firstname);
     $mail       = strtolower($mail);
 
+    //confert Data
+    $name = ucfirst($name);
+    $firstname = ucfirst($firstname);
+
+    //Generate Login
+    $lfname = substr($firstname, 0, 3);
+    $lname = substr($name, 0, 3);
+    $login = $lname . $lfname . random_int(0, 999);
+    // $login = substr($login, 0, 9);
+
     //Check data format
     if (preg_match($nregex, $name)) {
         $error['name'] = true;
     } else {
         $error['name'] = false;
+        $name = false;
     }
 
     if (preg_match($mregex, $mail)) {
         $error['mail'] = true;
     } else {
         $error['mail'] = false;
+        $mail = false;
     }
 
     if ($pass === $pass2) {
         unset($pass2);
 
         if (preg_match($pregex, $pass)) {
-            $pass = password_hash($pass, PASSWORD_DEFAULT);
+            $pass = password_hash($pass, PASSWORD_BCRYPT);
             $error['pass'] = true;
         } else {
             $error['pass'] = false;
+            $pass = false;
         }
     } else {
         $error['pass'] = false;
+        $pass = false;
     }
 
     if (strlen($content) > 0) {
         $error['content'] = true;
     } else {
         $error['content'] = false;
+        $content = false;
     }
 
     if (strlen($desc) > 0) {
         $error['desc'] = true;
     } else {
         $error['desc'] = false;
+        $desc = false;
     }
 
     if ($price > 0) {
         $error['price'] = true;
     } else {
         $error['price'] = false;
+        $prise = false;
     }
-    
+
     if ($tag > 0) {
         $error['tags'] = true;
     } else {
         $error['tags'] = false;
+        $tag = false;
     }
-    
+
     if ($statut > 0) {
         $error['statut'] = true;
     } else {
         $error['statut'] = false;
+        $statut = false;
     }
-
 
     //Picture Check ==> Picture Formater
     if (empty($image)) {
@@ -191,16 +249,6 @@ function checkinput($data)
         }
     }
 
-    //confert Data
-    $name = ucfirst($name);
-    $firstname = ucfirst($firstname);
-
-    //Generate Login
-    $lfname = substr($firstname, 0, 3);
-    $lname = substr($name, 0, 3);
-    $login = $lname . $lfname . random_int(0, 999);
-    // $login = substr($login, 0, 9);
-
     //Return Data
     $data = array();
 
@@ -229,6 +277,7 @@ function checkinput($data)
     $data['link']           = isset($image)     ? $image     : false;
 
     unset($_POST);
+
     return $data;
 }
 
@@ -240,7 +289,7 @@ function checkerror($for, $error)
     switch ($for) {
         case 'user':
         case 'admin':
-            if ($error['name'] !== true || $error['mail'] !== true || $error['pass'] !== true) {
+            if ($error['name'] === false || $error['mail'] === false || $error['pass'] === false) {
                 $result = false;
             } else {
                 $result = true;
@@ -248,7 +297,7 @@ function checkerror($for, $error)
             break;
 
         case 'activity':
-            if ($error['name'] !== true || $error['desc'] !== true || $error['content'] !== true || $error['price'] !== true) {
+            if ($error['name'] !== false || $error['desc'] !== false || $error['content'] !== false || $error['price'] !== false) {
                 $result = false;
             } else {
                 $result = true;
@@ -256,7 +305,7 @@ function checkerror($for, $error)
             break;
 
         case 'picture':
-            if ($error['name'] !== true || $error['desc'] !== true || $error['statut'] !== true || $error['tags'] !== true || $error['image'] !== true) {
+            if ($error['name'] !== false || $error['desc'] !== false || $error['statut'] !== false || $error['tags'] !== false || $error['image'] !== false) {
                 $result = false;
             } else {
                 $result = true;
@@ -268,10 +317,12 @@ function checkerror($for, $error)
             break;
     }
 
+    var_dump($result);
     return $result;
 }
 
-function gethome(){
+function gethome()
+{
     $activity = new ActivityController();
     $activity = $activity->index();
     // var_dump($activity);
@@ -297,5 +348,120 @@ function gethome(){
 
             <div class='player' id=$value->_media></div>
         </article>";
+    }
+}
+
+function checklog($login)
+{
+    $mregex = "/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/";
+
+    if (preg_match($mregex, $login)) {
+        return 'mail';
+    } else {
+        return 'login';
+    }
+}
+
+function existadmin($data)
+{
+    $admin = new AdminController();
+    $admins = $admin->index();
+    $login = checklog($data);
+
+    $adminMail = array();
+    foreach ($admins as $key => $value) {
+        array_push($adminMail, $value->_email);
+    }
+
+    $adminLogin = array();
+    foreach ($admins as $key => $value) {
+        array_push($adminLogin, $value->_login);
+    }
+
+    switch ($login) {
+        case 'mail':
+            if (in_array($data, $adminMail)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+
+        case 'login':
+            if (in_array($data, $adminLogin)) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+
+        default:
+            return false;
+            break;
+    }
+}
+
+function getactivities()
+{
+    $activity = new ActivityController();
+    $activity = $activity->index();
+
+    foreach ($activity as $key => $value) {
+        $typeid = $value->_type;
+        $type = new TypeController;
+        $type = $type->show($typeid);
+        $type = $type->_name;
+
+        echo "
+            <article>
+                <div class='stages'>
+                    <h2> $value->_name </h2>
+                    
+                    <h3> Description : </h3>
+                    <p> $value->_description </p>
+
+                    <h3> Content : </h3>
+                    <p> $value->_content </p>
+                                    
+                    <h3> Date :</h3>
+                    <p> $value->_date </p>
+                    
+                    <h3> Activity Type :</h3>
+                    <p> $type </p>
+
+                    <h3> Prices :</h3>
+                    <p> $value->_price € </p>
+
+                    <p> $value->_media </p>
+    
+                    <a class='button' href='#'>More info</a>
+                </div>
+    
+                <div class='player' id=$value->_media></div>
+            </article>";
+    }
+}
+
+function getphoto(){
+
+    $picture = new PictureController();
+    $picture = $picture->index();
+
+    foreach ($picture as $key => $value) {
+
+        $tagid = $value->_tags;
+        $tag = new TagController;
+        $tag = $tag->show($tagid);
+        $tag = $tag->_name;
+
+        echo "
+            <article>
+                <div class='stages'>
+                    <p>$tag</p>
+                    <p>$value->_description</p>
+                    <a class='button' href='#'>click here</a>
+                </div>
+                <div class='player' id=$value->_link></div>
+            </article>";
     }
 }

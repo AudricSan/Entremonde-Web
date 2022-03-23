@@ -1,4 +1,6 @@
 <?php
+include_once("../public/include/header.php");
+
 $role = new RoleController;
 $roles = $role->index();
 
@@ -9,6 +11,7 @@ if (isset($_POST)) {
 
 ?>
 
+<section style="margin-top: 8em">
 <form action="" method="POST">
     <label for="name">Enter your Name: </label>
     <input type="text" name="name" id="name"> <br>
@@ -36,6 +39,10 @@ if (isset($_POST)) {
 
     <label for="pass2">Confirm your Password: </label>
     <input type="password" name="pass2" id="pass2"> <br>
+    
+    <label for="human" style="display: none;">are you a human</label>
+    <input type="checkbox" name="human" id="human" checked style="display: none;">
 
     <input type="submit" value="Send">
 </form>
+</section>
