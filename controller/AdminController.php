@@ -23,6 +23,8 @@ class AdminController {
     }
     
     public function store($data) {
+        unset($_POST);
+
         if(isset($data)){
             $this->dao->store($data);
         }

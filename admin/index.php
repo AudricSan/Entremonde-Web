@@ -1,17 +1,12 @@
 <?php
-
 $title = "admin";
 include_once("../public/include/header.php");
 // include('../model/autoload.php');
 
-if (empty($_SESSION)) {
+if (!isset($_SESSION['admin'])) {
     header('location: login.php');
-
 } else {
-    if (existadmin($_SESSION['admin'])) {
-        // echo ('COUCOU admin : ' . $_SESSION['admin']);
-
-    } else {
+    if (!existadmin($_SESSION['admin'])) {
         unset($_SERVER['admin']);
         header('location: /');
     }
@@ -19,14 +14,10 @@ if (empty($_SESSION)) {
 ?>
 
 <section>
-<h1>Admin Connected</h1>
-
-
+    <h1>Admin <?php echo $_SESSION['admin'] ?> Connected</h1>
+    
+    
 </section>
-
-
-</div>
-</body>
-
 <?php include("../public/include/footer.php"); ?>
+
 </html>
