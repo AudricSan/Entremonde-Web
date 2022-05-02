@@ -57,9 +57,10 @@ echo "
     </head>
 ";
 
-$nav = str_contains($title, "admin");
 
-if ($nav === false) {
+// $nav = str_contains($title, "admin");
+
+if (strpos($title, 'admin') === false) {
     echo "
         <body>
         <div class='open'></div>
