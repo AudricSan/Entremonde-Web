@@ -50,15 +50,9 @@ if (file_exists('../env.php')) {
 
 function checkinput($data)
 {
-    if (!isset($data['human'])) {
+    if (isset($data['human'])) {
         return false;
-    } else {
-        if ($data['human'] !== 'on') {
-            return false;
-        }
     }
-
-    unset($_POST);
 
     // var_dump($data);
     // $var = [IF] ? [THEN] : [ELSE];
@@ -277,7 +271,6 @@ function checkinput($data)
     $data['link']           = isset($image)     ? $image     : false;
 
     unset($_POST);
-
     return $data;
 }
 

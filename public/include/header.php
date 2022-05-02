@@ -57,7 +57,10 @@ echo "
     </head>
 ";
 
-if ($title != 'admin') {
+
+// $nav = str_contains($title, "admin");
+
+if (strpos($title, 'admin') === false) {
     echo "
         <body>
         <div class='open'></div>
@@ -85,7 +88,7 @@ if ($title != 'admin') {
         <div class='open'></div>
         <header id='header'>
             <nav>
-                <figure id='logo'><a href='/'><img src='img/logo.png' alt='Logo' title='Entremonde ASBL Logo''></a></figure>
+            <figure id='logo'><a href='/admin'><img src='$imglink/logo.png' alt='Logo' title='Entremonde ASBL Logo''></a></figure>
                 <ul class='navigation'>
                     <li><a href='#'> Admin NAV </a></li>
                     <li><a href='#'> Admin NAV </a></li>
@@ -97,7 +100,7 @@ if ($title != 'admin') {
 
                 <ul class='navigation'>
                     <li><a href='/admin/disc'> Disconnect </a></li>
-                    <li><a href='/admin/add'> Add new Admin </a></li>
+                    <li><a href='/admin/new'> Add new Admin </a></li>
                 </ul>
             </nav>
         </header>

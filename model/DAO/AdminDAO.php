@@ -96,9 +96,6 @@ class AdminDAO
         $data = checkinput($data);
         $error = checkerror('admin', $data['error']);
 
-        var_dump($data);
-        var_dump($error);
-
         if ($error === false) {
             return false;
         }
@@ -112,8 +109,6 @@ class AdminDAO
             'Admin_Firstname' => $data['fname'],
             'Admin_Role'  => $data['role']
         ]);
-
-        var_dump($admin);
 
         if ($admin) {
             try {
@@ -183,7 +178,6 @@ class AdminDAO
         unset($data);
 
         $data = checklog($login);
-        var_dump($data);
 
         if ($data === 'login') {
             try {
